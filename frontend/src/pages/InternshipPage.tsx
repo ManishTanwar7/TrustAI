@@ -307,12 +307,12 @@ export const InternshipPage: React.FC = () => {
           <div className="bg-white rounded-2xl border-2 border-stone-900 p-6 sm:p-8 shadow-elevated space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-stone-100">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-emerald-500 text-stone-950 font-extrabold text-sm flex items-center justify-center">
-                  A
+                <div className="w-9 h-9 rounded-full bg-emerald-500 text-stone-950 font-extrabold text-xs flex items-center justify-center">
+                  MS
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-stone-900 flex items-center gap-2">
-                    Aria — AI Security Consultant
+                  MS — AI Security Consultant
                     <span className="text-[10px] font-normal bg-stone-100 text-stone-600 px-2 py-0.5 rounded-full">
                       Google Gemini-4 Reasoning
                     </span>
