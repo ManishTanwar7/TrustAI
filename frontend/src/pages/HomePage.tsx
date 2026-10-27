@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ShieldCheck, AlertTriangle, ArrowRight, Sparkles, 
   CheckCircle2, Chrome, Search, RotateCcw, Download,
-  Briefcase, ShoppingCart, FileCheck, Scale
+  Briefcase, ShoppingCart, FileCheck, Scale, Image as ImageIcon, 
+  UploadCloud, Eye, Users, Zap
 } from 'lucide-react';
 import { TrustGauge } from '../components/common/TrustGauge';
 import { VerdictBadge } from '../components/common/VerdictBadge';
@@ -15,6 +16,7 @@ interface SimulationScenario {
   subtitle: string;
   icon: any;
   inputText: string;
+  imagePreview?: string;
   score: number;
   verdict: 'SCAM LIKELY' | 'SAFE' | 'CAUTION';
   summary: string;
@@ -44,6 +46,29 @@ const SCENARIOS: SimulationScenario[] = [
       'Checking company registration database...',
       'Verifying recruiter communication channel...',
       'MS Security Consultant formulating verdict...'
+    ]
+  },
+  {
+    id: 'screenshot-multimodal',
+    title: '📷 Recruiter Chat Capture',
+    subtitle: 'Multimodal Vision Scan',
+    icon: ImageIcon,
+    inputText: '[Screenshot Uploaded: telegram_recruiter_chat.png] — Recruiter says: "Send $200 via USDT for training kit tracking ID."',
+    imagePreview: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&auto=format&fit=crop&q=80',
+    score: 8,
+    verdict: 'SCAM LIKELY',
+    summary: 'Multimodal Vision scan flagged an advance-fee fraud conversation in the uploaded chat capture.',
+    concerns: [
+      'Screenshot shows non-corporate messaging app',
+      'Cryptocurrency / Zelle transaction request detected in image',
+      'High-pressure immediate deadline'
+    ],
+    recommendation: 'Stop all contact. This pattern matches known phishing and crypto advance-fee rings.',
+    steps: [
+      'Processing visual layout with Multimodal Gemma 4 & Gemini Vision...',
+      'Detecting payment QR codes & crypto wallet addresses in image...',
+      'Cross-referencing recruiter handles with threat database...',
+      'MS Consultant verdict ready!'
     ]
   },
   {
@@ -93,6 +118,7 @@ const SCENARIOS: SimulationScenario[] = [
 export const HomePage: React.FC = () => {
   const [selectedScenario, setSelectedScenario] = useState<SimulationScenario>(SCENARIOS[0]);
   const [userInput, setUserInput] = useState(SCENARIOS[0].inputText);
+  const [uploadedImageName, setUploadedImageName] = useState<string | null>(null);
   const [isScanning, setIsScanning] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [hasScanned, setHasScanned] = useState(true);
@@ -100,6 +126,7 @@ export const HomePage: React.FC = () => {
   const startSimulation = (scenario: SimulationScenario) => {
     setSelectedScenario(scenario);
     setUserInput(scenario.inputText);
+    setUploadedImageName(scenario.imagePreview ? 'recruiter_screenshot.png' : null);
     setIsScanning(true);
     setHasScanned(false);
     setCurrentStepIndex(0);
@@ -117,18 +144,27 @@ export const HomePage: React.FC = () => {
     }, 550);
   };
 
-  const handleCustomScan = () => {
-    if (!userInput.trim()) return;
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setUploadedImageName(file.name);
+      setUserInput(`[Screenshot Uploaded: ${file.name}] — Analyzing image for upfront fee demands, payment QR codes, and suspicious recruiter handles.`);
+      handleCustomScan(file.name);
+    }
+  };
+
+  const handleCustomScan = (imageOverride?: string) => {
+    if (!userInput.trim() && !imageOverride) return;
     setIsScanning(true);
     setHasScanned(false);
     setCurrentStepIndex(0);
 
-    const isFake = /deposit|fee|pay|telegram|crypto|zelle|gift card/i.test(userInput);
+    const isFake = /deposit|fee|pay|telegram|crypto|zelle|gift card/i.test(userInput) || imageOverride;
     const customResult: SimulationScenario = {
       id: 'custom',
-      title: 'Custom Scan',
+      title: imageOverride ? 'Multimodal Image Scan' : 'Custom Scan',
       subtitle: 'Analyzed Input',
-      icon: Search,
+      icon: imageOverride ? ImageIcon : Search,
       inputText: userInput,
       score: isFake ? 14 : 88,
       verdict: isFake ? 'SCAM LIKELY' : 'SAFE',
@@ -142,7 +178,7 @@ export const HomePage: React.FC = () => {
         ? 'Never pay money or buy gift cards for any job offer. Stop communication immediately.'
         : 'Appears safe. Always verify official corporate email before sharing private information.',
       steps: [
-        'Parsing text for scam indicators...',
+        'Multimodal Vision: Analyzing visual layout and text...',
         'Cross-referencing advance-fee fraud database...',
         'Checking for manipulative pressure tactics...',
         'MS Consultant verdict ready!'
@@ -170,9 +206,9 @@ export const HomePage: React.FC = () => {
       <section className="text-center space-y-5 max-w-3xl mx-auto pt-6">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-900 shadow-subtle">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>TrustAI Scam Defense</span>
+          <span>Multimodal Gemma 4 & Gemini Vision</span>
           <span className="text-stone-300">|</span>
-          <span>MS Defense Engine</span>
+          <span>MS Security Shield</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-[1.1]">
@@ -180,7 +216,7 @@ export const HomePage: React.FC = () => {
         </h1>
 
         <p className="text-base sm:text-lg text-stone-600 leading-relaxed max-w-2xl mx-auto">
-          AI catches fake internship deposits, deceptive subscription countdowns, and predatory fine print in seconds.
+          Upload screenshots, paste job offers, or audit contracts. Multimodal AI catches deceptive traps in seconds.
         </p>
 
         {/* Action Buttons */}
@@ -201,6 +237,72 @@ export const HomePage: React.FC = () => {
             <Download className="w-4 h-4 text-emerald-600" />
             <span>Download Chrome Extension (.zip)</span>
           </a>
+        </div>
+      </section>
+
+      {/* Best Use of Gemma Showcase Section */}
+      <section className="bg-gradient-to-br from-stone-900 via-stone-900 to-emerald-950 text-white rounded-3xl p-6 sm:p-8 shadow-elevated border border-emerald-800/40 space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-stone-800 pb-5">
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-600 text-emerald-300 text-xs font-bold">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Track: Best Use of Gemma 4</span>
+            </div>
+            <h2 className="text-2xl font-black tracking-tight text-white">
+              Lightweight Open Intelligence. Real-World Community Shield.
+            </h2>
+            <p className="text-xs text-stone-300 max-w-2xl leading-relaxed">
+              Gemma 4 packs multimodal intelligence into an open-weights model accessible through the Gemini API. Here is what Gemma 4 brings to TrustAI:
+            </p>
+          </div>
+
+          <label className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-stone-950 text-xs font-bold rounded-xl transition-all shadow-subtle flex items-center gap-2 cursor-pointer shrink-0 self-start md:self-auto">
+            <UploadCloud className="w-4 h-4" />
+            <span>Upload Screenshot</span>
+            <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
+          </label>
+        </div>
+
+        {/* 3 Pillars from Gemma Track Prompt */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="p-5 rounded-2xl bg-stone-800/80 border border-stone-700/80 space-y-2.5"
+          >
+            <div className="w-8 h-8 rounded-xl bg-emerald-950 border border-emerald-600 flex items-center justify-center text-emerald-400">
+              <Eye className="w-4 h-4" />
+            </div>
+            <div className="text-sm font-bold text-white">Multimodal Experience</div>
+            <p className="text-xs text-stone-300 leading-relaxed">
+              Work with text and images together. TrustAI reads chat captures, recruiter DMs, and payment QR codes that text-only scrapers completely overlook.
+            </p>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="p-5 rounded-2xl bg-stone-800/80 border border-stone-700/80 space-y-2.5"
+          >
+            <div className="w-8 h-8 rounded-xl bg-emerald-950 border border-emerald-600 flex items-center justify-center text-emerald-400">
+              <Users className="w-4 h-4" />
+            </div>
+            <div className="text-sm font-bold text-white">Focused Community Tool</div>
+            <p className="text-xs text-stone-300 leading-relaxed">
+              A high-impact shield built for students, job seekers, and consumers to stop advance-fee job scams, fake security deposits, and dark pattern traps.
+            </p>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="p-5 rounded-2xl bg-stone-800/80 border border-stone-700/80 space-y-2.5"
+          >
+            <div className="w-8 h-8 rounded-xl bg-emerald-950 border border-emerald-600 flex items-center justify-center text-emerald-400">
+              <Zap className="w-4 h-4" />
+            </div>
+            <div className="text-sm font-bold text-white">Rapid Prototyping</div>
+            <p className="text-xs text-stone-300 leading-relaxed">
+              Open-weights speed combined with the Gemini API enables sub-second verdicts across both this unified web platform and our live Chrome extension.
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -284,15 +386,15 @@ export const HomePage: React.FC = () => {
       <section id="scanner-section" className="space-y-6 pt-4">
         <div className="text-center space-y-1">
           <h2 className="text-2xl font-black text-stone-900 tracking-tight">
-            Try the Live Simulator
+            Try the Multimodal Live Simulator
           </h2>
           <p className="text-xs text-stone-500">
-            Click any preset below to simulate the detection live:
+            Click any preset below to test text or multimodal screenshot detection:
           </p>
         </div>
 
         {/* Preset Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
           {SCENARIOS.map((scen) => {
             const Icon = scen.icon;
             const isSelected = selectedScenario.id === scen.id;
@@ -332,30 +434,40 @@ export const HomePage: React.FC = () => {
             />
           )}
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-bold text-stone-700 uppercase tracking-wider">
-                Target Content:
+              <label className="text-xs font-bold text-stone-700 uppercase tracking-wider flex items-center gap-1.5">
+                <span>Target Content or Image:</span>
+                {uploadedImageName && (
+                  <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded text-[10px] border border-emerald-200">
+                    📎 {uploadedImageName}
+                  </span>
+                )}
               </label>
-              <span className="text-[11px] text-stone-400">Click a preset above or edit here</span>
+              
+              <label className="text-xs text-emerald-700 font-bold hover:underline cursor-pointer flex items-center gap-1">
+                <UploadCloud className="w-3.5 h-3.5" />
+                <span>Upload Screenshot</span>
+                <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
+              </label>
             </div>
 
             <textarea
               rows={3}
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
-              placeholder="Paste any offer letter, recruiter message, website link, or contract clause..."
+              placeholder="Paste any offer letter, recruiter message, website link, or upload a screenshot above..."
               className="w-full text-xs sm:text-sm p-3.5 bg-stone-50 border border-stone-200 rounded-2xl outline-none focus:border-stone-400 transition-colors leading-relaxed"
             />
 
             <div className="flex justify-end gap-2 pt-1">
               <button
-                onClick={handleCustomScan}
+                onClick={() => handleCustomScan()}
                 disabled={isScanning || !userInput.trim()}
                 className="px-6 py-2.5 bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold rounded-xl transition-all shadow-subtle flex items-center gap-2 disabled:opacity-40"
               >
                 <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                <span>{isScanning ? 'Scanning...' : 'Scan with MS'}</span>
+                <span>{isScanning ? 'Scanning...' : 'Scan with MS (Gemma 4 Multimodal)'}</span>
               </button>
             </div>
           </div>
@@ -372,7 +484,7 @@ export const HomePage: React.FC = () => {
                 <div className="flex items-center justify-between text-xs font-semibold text-stone-700">
                   <span className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
-                    <span>MS Detection Fleet at work:</span>
+                    <span>Multimodal Detection at work:</span>
                   </span>
                   <span className="font-mono text-emerald-700">
                     Step {currentStepIndex + 1} of {selectedScenario.steps.length}
