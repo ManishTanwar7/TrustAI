@@ -5,17 +5,17 @@
 
 ---
 
-## 🌟 Vision
+##  Vision
 
 To create a safer and more transparent internet where digital technology empowers human autonomy, financial dignity, and privacy rather than exploiting cognitive biases, desperation, or legal opacity.
 
-## 🎯 Mission
+##  Mission
 
 To protect everyday users—especially students, freelancers, job seekers, and consumers—from fraudulent internships, predatory contractual fine print, deceptive dark UX patterns, privacy abuse, and phishing schemes by deploying an authoritative, empathetic AI Security Consultant (**Aria**) backed by a hierarchical multi-agent fleet.
 
 ---
 
-## 🛑 Problem Statement
+## Problem Statement
 
 The modern internet suffers from severe **information and power asymmetry**:
 
@@ -26,7 +26,7 @@ The modern internet suffers from severe **information and power asymmetry**:
 
 ---
 
-## 🌐 Social Implications of Technology
+## Social Implications of Technology
 
 Technology should serve as an equalizer, but unvetted platforms and automated deception disproportionately harm vulnerable demographics:
 - **Financial Harm to Students**: College students losing $200–$1,000 to fake internship equipment deposits face immediate financial distress and psychological trauma.
@@ -37,7 +37,7 @@ Technology should serve as an equalizer, but unvetted platforms and automated de
 
 ---
 
-## 💡 Solution Overview
+##  Solution Overview
 
 TrustAI introduces a **Hierarchical Multi-Agent AI Security Platform**:
 - **Aria (AI Security Consultant)**: A human-toned, protective security advisor. Instead of generic report dumps, Aria answers questions authoritatively (e.g., *"Should I accept this offer?"* → *"I reviewed the offer. Key concerns: Security deposit required, no company registration found. My recommendation: Avoid paying any upfront amount. Confidence: 87%"*).
@@ -47,7 +47,7 @@ TrustAI introduces a **Hierarchical Multi-Agent AI Security Platform**:
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 
 ```mermaid
 flowchart TD
@@ -76,7 +76,7 @@ flowchart TD
 
 ---
 
-## 🤖 Multi-Agent Architecture
+##  Multi-Agent Architecture
 
 | Agent Name | Core Responsibilities | Specialized Gemini System Prompt Focus |
 | :--- | :--- | :--- |
@@ -91,7 +91,7 @@ flowchart TD
 
 ---
 
-## 🧩 Browser Extension Architecture (Manifest V3)
+##  Browser Extension Architecture (Manifest V3)
 
 ```mermaid
 flowchart LR
@@ -114,7 +114,7 @@ flowchart LR
 
 ---
 
-## 🗄️ Database Design (Firebase Firestore)
+##  Database Design (Firebase Firestore)
 
 TrustAI stores scan records, audit history, and consultation logs in Firebase Firestore with automatic in-memory fallback:
 
@@ -231,7 +231,7 @@ TrustAI stores scan records, audit history, and consultation logs in Firebase Fi
 
 ---
 
-## 🚀 Local Setup Instructions
+##  Local Setup Instructions
 
 ### Prerequisites
 - Python 3.10+ (or `uv`)
@@ -274,7 +274,7 @@ Web application will be accessible at: `http://localhost:5173`
 
 ---
 
-## 🐳 Docker & Docker Compose
+##  Docker & Docker Compose
 
 Run the entire platform with a single command:
 ```bash
@@ -285,7 +285,7 @@ docker-compose up --build
 
 ---
 
-## ☁️ Deployment Instructions
+##  Deployment Instructions
 
 ### Deploy to Render
 
@@ -302,7 +302,7 @@ This repository includes a ready-to-deploy `render.yaml` Blueprint:
 
 ---
 
-## 🔄 GitHub Workflows (CI/CD)
+##  GitHub Workflows (CI/CD)
 
 - **Continuous Integration (`.github/workflows/ci.yml`)**:
   - Automatically runs pytest suite on every push.
@@ -312,20 +312,7 @@ This repository includes a ready-to-deploy `render.yaml` Blueprint:
 
 ---
 
-## 🗺️ Future Roadmap
-
-- [x] Hierarchical Multi-Agent Gemini Architecture
-- [x] Aria AI Security Consultant
-- [x] Manifest V3 Browser Extension with DOM Dark Pattern Scanner
-- [x] Student Internship Verification Portal
-- [x] Contract & Fine Print Plain-English Translator
-- [ ] University Career Center Single Sign-On (SSO) & Campus Fraud Alerts
-- [ ] Mobile App (React Native) for SMS Phishing and WhatsApp Job Fraud Scanning
-- [ ] Automated Letter-of-Demand Generator for Unfair Contract Dispute Resolution
-
----
-
-## 👥 Team & Acknowledgments
+##  Team & Acknowledgments
 
 - **Lead Architect & AI Engineer**: TrustAI Core Team
 - **AI Brain**: Google Gemini-4 API via Google AI Studio
@@ -333,6 +320,6 @@ This repository includes a ready-to-deploy `render.yaml` Blueprint:
 
 ---
 
-## 📄 License
+##  License
 
 Distributed under the **MIT License**. See `LICENSE` for more information.
