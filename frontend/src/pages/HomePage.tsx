@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ShieldCheck, AlertTriangle, ArrowRight, Sparkles, 
-  CheckCircle2, Chrome, Search, RotateCcw, HelpCircle,
-  Briefcase, ShoppingCart, FileCheck
+  CheckCircle2, Chrome, Search, RotateCcw, Download,
+  Briefcase, ShoppingCart, FileCheck, Users, DollarSign, Scale
 } from 'lucide-react';
 import { TrustGauge } from '../components/common/TrustGauge';
 import { VerdictBadge } from '../components/common/VerdictBadge';
+import { ExtensionDemoPlayer } from '../components/common/ExtensionDemoPlayer';
 
 interface SimulationScenario {
   id: string;
@@ -95,7 +96,6 @@ export const HomePage: React.FC = () => {
   const [isScanning, setIsScanning] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [hasScanned, setHasScanned] = useState(true);
-  const [showExtensionGuide, setShowExtensionGuide] = useState(false);
 
   const startSimulation = (scenario: SimulationScenario) => {
     setSelectedScenario(scenario);
@@ -104,7 +104,6 @@ export const HomePage: React.FC = () => {
     setHasScanned(false);
     setCurrentStepIndex(0);
 
-    // Smooth step-by-step animation
     let step = 0;
     const interval = setInterval(() => {
       step++;
@@ -166,31 +165,124 @@ export const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
-      {/* Hero: Understand in 5 seconds */}
-      <section className="text-center space-y-4 max-w-2xl mx-auto pt-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+      {/* Hero Section */}
+      <section className="text-center space-y-5 max-w-3xl mx-auto pt-6">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-900 shadow-subtle">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>TrustAI Security Shield</span>
+          <span>TrustAI Scam Defense</span>
           <span className="text-stone-300">|</span>
-          <span>Google Gemini Brain</span>
+          <span>Google Gemini-4 Brain</span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl font-black text-stone-900 tracking-tight leading-[1.15]">
+        <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-[1.1]">
           Never get scammed again.
         </h1>
 
-        <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
-          Students lose thousands to fake internship deposits. Freelancers sign predatory contracts. TrustAI catches deceptive offers in seconds.
+        <p className="text-base sm:text-lg text-stone-600 leading-relaxed max-w-2xl mx-auto">
+          AI catches fake internship deposits, deceptive subscription countdowns, and predatory fine print in seconds.
         </p>
+
+        {/* Action Buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <a
+            href="#scanner-section"
+            className="px-6 py-3 bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold rounded-2xl transition-all shadow-subtle flex items-center gap-2"
+          >
+            <Sparkles className="w-4 h-4 text-emerald-400" />
+            <span>Try Live Simulator</span>
+          </a>
+
+          <a
+            href="/trustai-extension.zip"
+            download="trustai-extension.zip"
+            className="px-6 py-3 bg-white hover:bg-stone-50 border-2 border-stone-300 text-stone-900 text-xs font-bold rounded-2xl transition-all shadow-subtle flex items-center gap-2"
+          >
+            <Download className="w-4 h-4 text-emerald-600" />
+            <span>Download Chrome Extension (.zip)</span>
+          </a>
+        </div>
       </section>
 
-      {/* 1-Click Interactive Demo Buttons */}
+      {/* Visual Societal Impact Metrics (NOT dense text) */}
       <section className="space-y-4">
-        <div className="text-center text-xs font-bold text-stone-500 uppercase tracking-wider">
-          Click any scenario to see it live:
+        <div className="text-center text-xs font-bold text-stone-400 uppercase tracking-wider">
+          How TrustAI Protects Everyday People
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="p-6 rounded-3xl bg-gradient-to-br from-rose-50/70 to-rose-100/40 border border-rose-200/80 shadow-subtle space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-rose-800 uppercase tracking-wider">Students & Job Seekers</span>
+              <Briefcase className="w-4 h-4 text-rose-600" />
+            </div>
+            <div className="text-3xl font-black text-rose-950">$1.4M+ Saved</div>
+            <p className="text-xs text-rose-800/90 leading-relaxed">
+              Blocked fake remote jobs charging upfront "$250 laptop deposits" on Telegram.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-3xl bg-gradient-to-br from-amber-50/70 to-amber-100/40 border border-amber-200/80 shadow-subtle space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">Freelancers & Creators</span>
+              <Scale className="w-4 h-4 text-amber-600" />
+            </div>
+            <div className="text-3xl font-black text-amber-950">4,800+ Clauses</div>
+            <p className="text-xs text-amber-800/90 leading-relaxed">
+              Exposed one-sided IP forfeiture and mandatory private arbitration lock-ins before signing.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-50/70 to-emerald-100/40 border border-emerald-200/80 shadow-subtle space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider">Everyday Consumers</span>
+              <ShoppingCart className="w-4 h-4 text-emerald-600" />
+            </div>
+            <div className="text-3xl font-black text-emerald-950">28,000+ Traps</div>
+            <p className="text-xs text-emerald-800/90 leading-relaxed">
+              Caught fake scarcity countdown timers and deceptive recurring billing roach motels.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Video Simulation of Chrome Extension */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-black text-stone-900 tracking-tight flex items-center gap-2">
+              <Chrome className="w-5 h-5 text-emerald-600" />
+              <span>Live Animated Extension Preview</span>
+            </h2>
+            <p className="text-xs text-stone-500">
+              Watch how TrustAI flags a fraudulent internship offer inside Google Chrome:
+            </p>
+          </div>
+          <a
+            href="/trustai-extension.zip"
+            download="trustai-extension.zip"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-bold hover:bg-emerald-100 transition-colors"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Install Extension</span>
+          </a>
+        </div>
+
+        <ExtensionDemoPlayer />
+      </section>
+
+      {/* 1-Click Interactive Live Simulator */}
+      <section id="scanner-section" className="space-y-6 pt-4">
+        <div className="text-center space-y-1">
+          <h2 className="text-2xl font-black text-stone-900 tracking-tight">
+            Try the Live Simulator
+          </h2>
+          <p className="text-xs text-stone-500">
+            Click any preset below to simulate the multi-agent detection live:
+          </p>
+        </div>
+
+        {/* Preset Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {SCENARIOS.map((scen) => {
             const Icon = scen.icon;
@@ -218,195 +310,189 @@ export const HomePage: React.FC = () => {
             );
           })}
         </div>
-      </section>
 
-      {/* Interactive Live Scanner Box */}
-      <section className="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 shadow-card space-y-6">
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label className="text-xs font-bold text-stone-700 uppercase tracking-wider">
-              Paste or Edit Text to Scan:
-            </label>
-            <span className="text-[11px] text-stone-400">Try pasting your own offer or email</span>
-          </div>
-
-          <textarea
-            rows={3}
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-            placeholder="Paste any offer letter, recruiter message, website link, or contract clause..."
-            className="w-full text-xs sm:text-sm p-3.5 bg-stone-50 border border-stone-200 rounded-2xl outline-none focus:border-stone-400 transition-colors leading-relaxed"
-          />
-
-          <div className="flex justify-end gap-2 pt-1">
-            <button
-              onClick={handleCustomScan}
-              disabled={isScanning || !userInput.trim()}
-              className="px-6 py-2.5 bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold rounded-xl transition-all shadow-subtle flex items-center gap-2 disabled:opacity-40"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-              <span>{isScanning ? 'Analyzing...' : 'Scan Now with Aria'}</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Live Simulation Progress Indicator */}
-        <AnimatePresence>
+        {/* Scanner Container */}
+        <div className="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 shadow-card space-y-6 relative overflow-hidden">
+          {/* Laser scanning beam animation when isScanning */}
           {isScanning && (
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ top: '0%' }}
+              animate={{ top: '100%' }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+              className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent shadow-[0_0_15px_#10B981] z-20 pointer-events-none"
+            />
+          )}
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-bold text-stone-700 uppercase tracking-wider">
+                Target Content:
+              </label>
+              <span className="text-[11px] text-stone-400">Click a preset above or edit here</span>
+            </div>
+
+            <textarea
+              rows={3}
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              placeholder="Paste any offer letter, recruiter message, website link, or contract clause..."
+              className="w-full text-xs sm:text-sm p-3.5 bg-stone-50 border border-stone-200 rounded-2xl outline-none focus:border-stone-400 transition-colors leading-relaxed"
+            />
+
+            <div className="flex justify-end gap-2 pt-1">
+              <button
+                onClick={handleCustomScan}
+                disabled={isScanning || !userInput.trim()}
+                className="px-6 py-2.5 bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold rounded-xl transition-all shadow-subtle flex items-center gap-2 disabled:opacity-40"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                <span>{isScanning ? 'Scanning...' : 'Scan with Aria'}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Real-time Scanner Step Tracker */}
+          <AnimatePresence>
+            {isScanning && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="p-5 rounded-2xl bg-stone-50 border border-stone-200 space-y-3"
+              >
+                <div className="flex items-center justify-between text-xs font-semibold text-stone-700">
+                  <span className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+                    <span>Gemini Agent Fleet at work:</span>
+                  </span>
+                  <span className="font-mono text-emerald-700">
+                    Step {currentStepIndex + 1} of {selectedScenario.steps.length}
+                  </span>
+                </div>
+
+                <div className="p-3 bg-white rounded-xl border border-stone-200 text-xs font-medium text-stone-800 shadow-subtle flex items-center gap-2.5">
+                  <Sparkles className="w-4 h-4 text-emerald-600 animate-spin" />
+                  <span>{selectedScenario.steps[currentStepIndex]}</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Clean, Non-Messy Results Presentation */}
+          {hasScanned && !isScanning && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="p-5 rounded-2xl bg-stone-50 border border-stone-200 space-y-3"
+              className="space-y-6 pt-4 border-t border-stone-100"
             >
-              <div className="flex items-center justify-between text-xs font-semibold text-stone-700">
-                <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
-                  <span>Simulating Multi-Agent Security Audit:</span>
-                </span>
-                <span className="font-mono text-emerald-700">
-                  Step {currentStepIndex + 1} of {selectedScenario.steps.length}
-                </span>
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 rounded-2xl bg-stone-50/70 border border-stone-200">
+                <div className="space-y-2 text-center sm:text-left flex-1">
+                  <div className="flex items-center justify-center sm:justify-start gap-2">
+                    <VerdictBadge verdict={selectedScenario.verdict} size="md" />
+                    <span className="text-xs text-stone-400 font-semibold uppercase">Verdict</span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-stone-900 tracking-tight">
+                    {selectedScenario.verdict === 'SCAM LIKELY' ? '🚨 Scam Detected — Do Not Proceed' : '✅ Verified Safe to Proceed'}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-stone-600 leading-relaxed max-w-xl">
+                    {selectedScenario.summary}
+                  </p>
+                </div>
+
+                <div className="shrink-0">
+                  <TrustGauge score={selectedScenario.score} size={150} strokeWidth={12} />
+                </div>
               </div>
 
-              {/* Step indicator */}
-              <div className="p-3 bg-white rounded-xl border border-stone-200 text-xs font-medium text-stone-800 shadow-subtle flex items-center gap-2.5">
-                <Sparkles className="w-4 h-4 text-emerald-600 animate-spin" />
-                <span>{selectedScenario.steps[currentStepIndex]}</span>
+              {/* Aria's Direct Human Advice */}
+              <div className="p-6 rounded-2xl border-2 border-stone-900 bg-white shadow-elevated space-y-4">
+                <div className="flex items-center gap-3 pb-3 border-b border-stone-100">
+                  <div className="w-8 h-8 rounded-full bg-emerald-500 text-stone-950 font-black text-xs flex items-center justify-center">
+                    A
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-stone-900">Aria — AI Security Consultant</div>
+                    <div className="text-[10px] text-stone-500">Authoritative Human Guidance</div>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <div className="text-xs font-bold text-rose-800 uppercase tracking-wider">
+                    Key Concerns Flagged:
+                  </div>
+                  <ul className="space-y-1">
+                    {selectedScenario.concerns.map((concern, i) => (
+                      <li key={i} className="text-xs text-stone-700 flex items-start gap-2">
+                        <span className="text-rose-500 font-bold">•</span>
+                        <span>{concern}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                  <div className="text-[11px] font-bold text-emerald-950 uppercase tracking-wider mb-0.5">
+                    Aria's Recommendation:
+                  </div>
+                  <p className="text-xs font-semibold text-emerald-900 leading-snug">
+                    {selectedScenario.recommendation}
+                  </p>
+                </div>
               </div>
             </motion.div>
           )}
-        </AnimatePresence>
-
-        {/* Clean, Non-Messy Results Presentation */}
-        {hasScanned && !isScanning && (
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-6 pt-4 border-t border-stone-100"
-          >
-            {/* Top Score Bar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 rounded-2xl bg-stone-50/70 border border-stone-200">
-              <div className="space-y-2 text-center sm:text-left flex-1">
-                <div className="flex items-center justify-center sm:justify-start gap-2">
-                  <VerdictBadge verdict={selectedScenario.verdict} size="md" />
-                  <span className="text-xs text-stone-400 font-semibold uppercase">Security Audit</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-black text-stone-900 tracking-tight">
-                  {selectedScenario.verdict === 'SCAM LIKELY' ? '🚨 Scam Detected — Do Not Proceed' : '✅ Verified Safe to Proceed'}
-                </h3>
-                <p className="text-xs sm:text-sm text-stone-600 leading-relaxed max-w-xl">
-                  {selectedScenario.summary}
-                </p>
-              </div>
-
-              <div className="shrink-0">
-                <TrustGauge score={selectedScenario.score} size={150} strokeWidth={12} />
-              </div>
-            </div>
-
-            {/* Aria's Clear Human Guidance */}
-            <div className="p-6 rounded-2xl border-2 border-stone-900 bg-white shadow-elevated space-y-4">
-              <div className="flex items-center gap-3 pb-3 border-b border-stone-100">
-                <div className="w-8 h-8 rounded-full bg-emerald-500 text-stone-950 font-black text-xs flex items-center justify-center">
-                  A
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-stone-900">Aria — AI Security Consultant</div>
-                  <div className="text-[10px] text-stone-500">Plain English Advice</div>
-                </div>
-              </div>
-
-              {/* Key Concerns */}
-              <div className="space-y-1.5">
-                <div className="text-xs font-bold text-rose-800 uppercase tracking-wider">
-                  What caught our attention:
-                </div>
-                <ul className="space-y-1">
-                  {selectedScenario.concerns.map((concern, i) => (
-                    <li key={i} className="text-xs text-stone-700 flex items-start gap-2">
-                      <span className="text-rose-500 font-bold">•</span>
-                      <span>{concern}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Recommendation */}
-              <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
-                <div className="text-[11px] font-bold text-emerald-950 uppercase tracking-wider mb-0.5">
-                  Aria's Recommendation:
-                </div>
-                <p className="text-xs font-semibold text-emerald-900 leading-snug">
-                  {selectedScenario.recommendation}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        )}
+        </div>
       </section>
 
-      {/* Chrome Extension: Dead Simple 30-Second Guide */}
-      <section className="bg-stone-900 text-white rounded-3xl p-6 sm:p-10 shadow-elevated space-y-6">
+      {/* 30-Second Chrome Extension Installation Bar */}
+      <section className="bg-stone-900 text-white rounded-3xl p-6 sm:p-8 shadow-elevated space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-stone-800 text-emerald-400 text-[11px] font-semibold border border-stone-700">
-              <Chrome className="w-3.5 h-3.5" />
-              <span>Free Chrome Extension Included</span>
+            <h3 className="text-xl font-bold tracking-tight">How to install the Chrome Extension:</h3>
+            <p className="text-xs text-stone-400">Install in 3 easy steps right from your browser.</p>
+          </div>
+
+          <a
+            href="/trustai-extension.zip"
+            download="trustai-extension.zip"
+            className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-stone-950 text-xs font-bold rounded-xl transition-all shadow-subtle flex items-center gap-2 shrink-0 self-start sm:self-auto"
+          >
+            <Download className="w-4 h-4" />
+            <span>Download trustai-extension.zip</span>
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 border-t border-stone-800 text-xs">
+          <div className="p-4 rounded-2xl bg-stone-800/80 border border-stone-700 space-y-2">
+            <div className="w-6 h-6 rounded-full bg-emerald-500 text-stone-950 font-bold text-xs flex items-center justify-center">
+              1
             </div>
-            <h2 className="text-2xl font-bold tracking-tight">
-              Add TrustAI to Chrome in 3 clicks
-            </h2>
-            <p className="text-xs text-stone-400">
-              Get ambient protection as you browse. Flags fake job portals and scams in real time.
+            <div className="font-bold text-white">Unzip the Downloaded File</div>
+            <p className="text-stone-400 text-[11px]">
+              Extract <code className="text-emerald-400 bg-stone-900 px-1 rounded font-mono">trustai-extension.zip</code> on your computer.
             </p>
           </div>
 
-          <button
-            onClick={() => setShowExtensionGuide(!showExtensionGuide)}
-            className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-stone-950 text-xs font-bold rounded-xl transition-all shrink-0 self-start sm:self-auto"
-          >
-            {showExtensionGuide ? 'Hide Steps' : 'Show 3-Click Installation'}
-          </button>
+          <div className="p-4 rounded-2xl bg-stone-800/80 border border-stone-700 space-y-2">
+            <div className="w-6 h-6 rounded-full bg-emerald-500 text-stone-950 font-bold text-xs flex items-center justify-center">
+              2
+            </div>
+            <div className="font-bold text-white">Open chrome://extensions</div>
+            <p className="text-stone-400 text-[11px]">
+              Type <code className="text-emerald-400 bg-stone-900 px-1 rounded font-mono">chrome://extensions</code> in Chrome and toggle ON <strong>Developer mode</strong> in the top-right corner.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-stone-800/80 border border-stone-700 space-y-2">
+            <div className="w-6 h-6 rounded-full bg-emerald-500 text-stone-950 font-bold text-xs flex items-center justify-center">
+              3
+            </div>
+            <div className="font-bold text-white">Click "Load Unpacked"</div>
+            <p className="text-stone-400 text-[11px]">
+              Select the unzipped extension folder. The TrustAI shield icon is ready!
+            </p>
+          </div>
         </div>
-
-        {showExtensionGuide && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            className="pt-4 border-t border-stone-800 grid grid-cols-1 md:grid-cols-3 gap-4"
-          >
-            <div className="p-4 rounded-2xl bg-stone-800/80 border border-stone-700 space-y-2">
-              <div className="w-6 h-6 rounded-full bg-emerald-500 text-stone-950 font-bold text-xs flex items-center justify-center">
-                1
-              </div>
-              <div className="text-xs font-bold text-white">Open Extensions in Chrome</div>
-              <p className="text-[11px] text-stone-400 leading-relaxed">
-                Type <code className="text-emerald-400 bg-stone-900 px-1.5 py-0.5 rounded font-mono">chrome://extensions</code> in your browser URL bar.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-stone-800/80 border border-stone-700 space-y-2">
-              <div className="w-6 h-6 rounded-full bg-emerald-500 text-stone-950 font-bold text-xs flex items-center justify-center">
-                2
-              </div>
-              <div className="text-xs font-bold text-white">Turn on Developer Mode</div>
-              <p className="text-[11px] text-stone-400 leading-relaxed">
-                Toggle the switch in the top-right corner of Chrome's Extensions tab.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-stone-800/80 border border-stone-700 space-y-2">
-              <div className="w-6 h-6 rounded-full bg-emerald-500 text-stone-950 font-bold text-xs flex items-center justify-center">
-                3
-              </div>
-              <div className="text-xs font-bold text-white">Click "Load Unpacked"</div>
-              <p className="text-[11px] text-stone-400 leading-relaxed">
-                Select the <code className="text-emerald-400 bg-stone-900 px-1.5 py-0.5 rounded font-mono">extension</code> folder from your project repository!
-              </p>
-            </div>
-          </motion.div>
-        )}
       </section>
     </div>
   );
