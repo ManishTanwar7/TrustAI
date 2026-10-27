@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ShieldCheck, AlertTriangle, ArrowRight, Sparkles, 
   CheckCircle2, Chrome, Search, RotateCcw, Download,
-  Briefcase, ShoppingCart, FileCheck, Users, DollarSign, Scale
+  Briefcase, ShoppingCart, FileCheck, Scale
 } from 'lucide-react';
 import { TrustGauge } from '../components/common/TrustGauge';
 import { VerdictBadge } from '../components/common/VerdictBadge';
@@ -43,7 +43,7 @@ const SCENARIOS: SimulationScenario[] = [
       'Scanning message for advance-fee triggers...',
       'Checking company registration database...',
       'Verifying recruiter communication channel...',
-      'Aria Security Consultant formulating verdict...'
+      'MS Security Consultant formulating verdict...'
     ]
   },
   {
@@ -114,7 +114,7 @@ export const HomePage: React.FC = () => {
         setIsScanning(false);
         setHasScanned(true);
       }
-    }, 600);
+    }, 550);
   };
 
   const handleCustomScan = () => {
@@ -145,7 +145,7 @@ export const HomePage: React.FC = () => {
         'Parsing text for scam indicators...',
         'Cross-referencing advance-fee fraud database...',
         'Checking for manipulative pressure tactics...',
-        'Aria Consultant verdict ready!'
+        'MS Consultant verdict ready!'
       ]
     };
 
@@ -172,7 +172,7 @@ export const HomePage: React.FC = () => {
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span>TrustAI Scam Defense</span>
           <span className="text-stone-300">|</span>
-          <span>Google Gemini-4 Brain</span>
+          <span>MS Defense Engine</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-[1.1]">
@@ -204,14 +204,17 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Visual Societal Impact Metrics (NOT dense text) */}
+      {/* Visual Societal Impact Metrics */}
       <section className="space-y-4">
         <div className="text-center text-xs font-bold text-stone-400 uppercase tracking-wider">
           How TrustAI Protects Everyday People
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-6 rounded-3xl bg-gradient-to-br from-rose-50/70 to-rose-100/40 border border-rose-200/80 shadow-subtle space-y-2">
+          <motion.div
+            whileHover={{ y: -4, scale: 1.01 }}
+            className="p-6 rounded-3xl bg-gradient-to-br from-rose-50/70 to-rose-100/40 border border-rose-200/80 shadow-subtle space-y-2 transition-all"
+          >
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-rose-800 uppercase tracking-wider">Students & Job Seekers</span>
               <Briefcase className="w-4 h-4 text-rose-600" />
@@ -220,9 +223,12 @@ export const HomePage: React.FC = () => {
             <p className="text-xs text-rose-800/90 leading-relaxed">
               Blocked fake remote jobs charging upfront "$250 laptop deposits" on Telegram.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="p-6 rounded-3xl bg-gradient-to-br from-amber-50/70 to-amber-100/40 border border-amber-200/80 shadow-subtle space-y-2">
+          <motion.div
+            whileHover={{ y: -4, scale: 1.01 }}
+            className="p-6 rounded-3xl bg-gradient-to-br from-amber-50/70 to-amber-100/40 border border-amber-200/80 shadow-subtle space-y-2 transition-all"
+          >
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">Freelancers & Creators</span>
               <Scale className="w-4 h-4 text-amber-600" />
@@ -231,9 +237,12 @@ export const HomePage: React.FC = () => {
             <p className="text-xs text-amber-800/90 leading-relaxed">
               Exposed one-sided IP forfeiture and mandatory private arbitration lock-ins before signing.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-50/70 to-emerald-100/40 border border-emerald-200/80 shadow-subtle space-y-2">
+          <motion.div
+            whileHover={{ y: -4, scale: 1.01 }}
+            className="p-6 rounded-3xl bg-gradient-to-br from-emerald-50/70 to-emerald-100/40 border border-emerald-200/80 shadow-subtle space-y-2 transition-all"
+          >
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider">Everyday Consumers</span>
               <ShoppingCart className="w-4 h-4 text-emerald-600" />
@@ -242,7 +251,7 @@ export const HomePage: React.FC = () => {
             <p className="text-xs text-emerald-800/90 leading-relaxed">
               Caught fake scarcity countdown timers and deceptive recurring billing roach motels.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -261,10 +270,10 @@ export const HomePage: React.FC = () => {
           <a
             href="/trustai-extension.zip"
             download="trustai-extension.zip"
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-bold hover:bg-emerald-100 transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-bold hover:bg-emerald-100 transition-colors shadow-subtle"
           >
             <Download className="w-3.5 h-3.5" />
-            <span>Install Extension</span>
+            <span>Install Extension (.zip)</span>
           </a>
         </div>
 
@@ -278,7 +287,7 @@ export const HomePage: React.FC = () => {
             Try the Live Simulator
           </h2>
           <p className="text-xs text-stone-500">
-            Click any preset below to simulate the multi-agent detection live:
+            Click any preset below to simulate the detection live:
           </p>
         </div>
 
@@ -318,7 +327,7 @@ export const HomePage: React.FC = () => {
             <motion.div
               initial={{ top: '0%' }}
               animate={{ top: '100%' }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
               className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent shadow-[0_0_15px_#10B981] z-20 pointer-events-none"
             />
           )}
@@ -346,7 +355,7 @@ export const HomePage: React.FC = () => {
                 className="px-6 py-2.5 bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold rounded-xl transition-all shadow-subtle flex items-center gap-2 disabled:opacity-40"
               >
                 <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                <span>{isScanning ? 'Scanning...' : 'Scan with Aria'}</span>
+                <span>{isScanning ? 'Scanning...' : 'Scan with MS'}</span>
               </button>
             </div>
           </div>
@@ -363,7 +372,7 @@ export const HomePage: React.FC = () => {
                 <div className="flex items-center justify-between text-xs font-semibold text-stone-700">
                   <span className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
-                    <span>Gemini Agent Fleet at work:</span>
+                    <span>MS Detection Fleet at work:</span>
                   </span>
                   <span className="font-mono text-emerald-700">
                     Step {currentStepIndex + 1} of {selectedScenario.steps.length}
@@ -378,7 +387,7 @@ export const HomePage: React.FC = () => {
             )}
           </AnimatePresence>
 
-          {/* Clean, Non-Messy Results Presentation */}
+          {/* Clean Results Presentation */}
           {hasScanned && !isScanning && (
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -404,14 +413,14 @@ export const HomePage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Aria's Direct Human Advice */}
+              {/* MS Direct Human Guidance */}
               <div className="p-6 rounded-2xl border-2 border-stone-900 bg-white shadow-elevated space-y-4">
                 <div className="flex items-center gap-3 pb-3 border-b border-stone-100">
                   <div className="w-8 h-8 rounded-full bg-emerald-500 text-stone-950 font-black text-xs flex items-center justify-center">
-                    A
+                    MS
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-stone-900">Aria — AI Security Consultant</div>
+                    <div className="text-xs font-bold text-stone-900">MS — AI Security Consultant</div>
                     <div className="text-[10px] text-stone-500">Authoritative Human Guidance</div>
                   </div>
                 </div>
@@ -432,7 +441,7 @@ export const HomePage: React.FC = () => {
 
                 <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
                   <div className="text-[11px] font-bold text-emerald-950 uppercase tracking-wider mb-0.5">
-                    Aria's Recommendation:
+                    MS Recommendation:
                   </div>
                   <p className="text-xs font-semibold text-emerald-900 leading-snug">
                     {selectedScenario.recommendation}

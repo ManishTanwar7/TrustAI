@@ -7,14 +7,14 @@ import {
 
 export const ExtensionDemoPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
-  const [currentFrame, setCurrentFrame] = useState(0); // 0 to 4
+  const [currentFrame, setCurrentFrame] = useState(0);
   const totalFrames = 4;
 
   const frameLabels = [
     "1. Student opens job offer",
     "2. Extension scans page DOM",
     "3. Upfront deposit scam caught",
-    "4. Aria gives plain guidance"
+    "4. MS gives plain guidance"
   ];
 
   useEffect(() => {
@@ -29,7 +29,6 @@ export const ExtensionDemoPlayer: React.FC = () => {
     <div className="bg-stone-900 rounded-3xl border border-stone-800 shadow-2xl overflow-hidden text-stone-100 space-y-0">
       {/* Chrome Window Top Bar */}
       <div className="px-4 py-3 bg-stone-950 border-b border-stone-800 flex items-center justify-between">
-        {/* Window dots */}
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-rose-500/80" />
           <div className="w-3 h-3 rounded-full bg-amber-500/80" />
@@ -39,13 +38,11 @@ export const ExtensionDemoPlayer: React.FC = () => {
           </span>
         </div>
 
-        {/* Address bar */}
         <div className="flex-1 max-w-md mx-3 px-3 py-1 bg-stone-900 border border-stone-800 rounded-lg flex items-center gap-2 text-xs text-stone-400 font-mono">
           <Lock className="w-3 h-3 text-stone-500 shrink-0" />
           <span className="text-stone-300 truncate">https://apex-careers.xyz/internship-offer</span>
         </div>
 
-        {/* Browser Extension Toolbar Icon */}
         <div className="flex items-center gap-2">
           <div className={`relative px-2 py-1 rounded-md flex items-center gap-1.5 transition-all ${
             currentFrame >= 1 ? 'bg-rose-950/80 border border-rose-600/50 text-rose-300' : 'bg-stone-800 text-stone-400'
@@ -63,7 +60,6 @@ export const ExtensionDemoPlayer: React.FC = () => {
 
       {/* Simulated Webpage Body */}
       <div className="relative min-h-[380px] p-6 bg-stone-950 text-stone-800 flex flex-col justify-between overflow-hidden">
-        {/* Subtle grid pattern background */}
         <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]" />
 
         {/* Webpage Content */}
@@ -85,7 +81,6 @@ export const ExtensionDemoPlayer: React.FC = () => {
               "Congratulations! You were selected for our remote internship program. We will courier your brand-new Apple MacBook Pro M3 and testing kit directly to your home address."
             </p>
 
-            {/* Suspicious deposit callout */}
             <div className={`p-3 rounded-xl border transition-all ${
               currentFrame >= 1 
                 ? 'bg-rose-50 border-rose-300 ring-2 ring-rose-500/20 text-rose-900' 
@@ -102,7 +97,7 @@ export const ExtensionDemoPlayer: React.FC = () => {
           </div>
         </div>
 
-        {/* Frame 2 & 3: Floating In-Page Security Pill in bottom right */}
+        {/* Floating In-Page Security Pill in bottom right */}
         <AnimatePresence>
           {currentFrame >= 1 && (
             <motion.div
@@ -117,7 +112,7 @@ export const ExtensionDemoPlayer: React.FC = () => {
           )}
         </AnimatePresence>
 
-        {/* Frame 3 & 4: Extension Popup Dropdown Simulation */}
+        {/* Extension Popup Dropdown Simulation */}
         <AnimatePresence>
           {currentFrame >= 2 && (
             <motion.div
@@ -128,8 +123,8 @@ export const ExtensionDemoPlayer: React.FC = () => {
             >
               <div className="flex items-center justify-between pb-2 border-b border-stone-100">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-lg bg-stone-900 text-emerald-400 flex items-center justify-center font-bold text-xs">
-                    T
+                  <div className="w-6 h-6 rounded-lg bg-stone-900 text-emerald-400 flex items-center justify-center font-black text-xs">
+                    MS
                   </div>
                   <div>
                     <div className="text-xs font-bold leading-tight">TrustAI Shield</div>
@@ -151,11 +146,11 @@ export const ExtensionDemoPlayer: React.FC = () => {
                 </div>
               </div>
 
-              {/* Aria Human Guidance inside popup */}
+              {/* MS Guidance inside popup */}
               <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
                 <div className="text-[10px] font-bold text-emerald-950 uppercase tracking-wider flex items-center gap-1">
                   <Sparkles className="w-3 h-3 text-emerald-600" />
-                  <span>Aria AI Consultant Advice:</span>
+                  <span>MS Consultant Advice:</span>
                 </div>
                 <p className="text-xs font-bold text-emerald-900 leading-snug">
                   "Never send money for job equipment. Legitimate employers provide laptops for free. Block this recruiter immediately."
@@ -168,7 +163,6 @@ export const ExtensionDemoPlayer: React.FC = () => {
 
       {/* Video Simulation Controls Bar */}
       <div className="px-6 py-4 bg-stone-950 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-        {/* Play / Pause / Restart */}
         <div className="flex items-center gap-3">
           <button
             onClick={() => setIsPlaying(!isPlaying)}
@@ -191,7 +185,6 @@ export const ExtensionDemoPlayer: React.FC = () => {
           </span>
         </div>
 
-        {/* Step dots */}
         <div className="flex items-center gap-2">
           {frameLabels.map((_, idx) => (
             <button

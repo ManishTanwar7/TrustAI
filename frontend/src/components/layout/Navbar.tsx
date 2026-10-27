@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Shield, Sparkles, Menu, X, Chrome, Briefcase, Search } from 'lucide-react';
+import { Shield, Sparkles, Menu, X, Chrome } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,7 +28,7 @@ export const Navbar: React.FC = () => {
                 TrustAI
               </span>
               <span className="text-[10px] text-stone-500 font-medium tracking-wide mt-0.5">
-                Scam & Security Shield
+                MS Security Shield
               </span>
             </div>
           </Link>
@@ -52,20 +52,21 @@ export const Navbar: React.FC = () => {
 
           {/* Clean Action Buttons */}
           <div className="hidden sm:flex items-center gap-2.5">
-            <Link
-              to="/extension-hub"
+            <a
+              href="/trustai-extension.zip"
+              download="trustai-extension.zip"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-stone-700 hover:text-stone-900 hover:bg-stone-100 transition-colors border border-stone-200"
             >
               <Chrome className="w-3.5 h-3.5 text-stone-500" />
-              <span>Get Extension</span>
-            </Link>
+              <span>Get Extension (.zip)</span>
+            </a>
 
             <Link
               to="/assistant"
               className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-xs font-bold text-white bg-stone-900 hover:bg-stone-800 shadow-subtle transition-all"
             >
               <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Ask Aria</span>
+              <span>Ask MS</span>
             </Link>
           </div>
 
@@ -104,7 +105,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center px-4 py-2 rounded-xl text-xs font-bold text-white bg-stone-900"
             >
-              Ask Aria AI Consultant
+              Ask MS Consultant
             </Link>
           </div>
         </div>

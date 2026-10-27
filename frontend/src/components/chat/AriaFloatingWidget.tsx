@@ -10,7 +10,7 @@ export const AriaFloatingWidget: React.FC = () => {
     {
       id: 'welcome',
       role: 'assistant',
-      content: "Hello, I'm Aria, your TrustAI Security Consultant. Paste any internship offer, suspicious message, contract snippet, or URL, and I'll break down the hidden risks for you.",
+      content: "Hello, I'm MS, your TrustAI Security Consultant. Paste any internship offer, suspicious message, contract clause, or link, and I'll break down the hidden risks for you.",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
@@ -59,7 +59,7 @@ export const AriaFloatingWidget: React.FC = () => {
         {
           id: `err_${Date.now()}`,
           role: 'assistant',
-          content: "I encountered an error connecting to the neural consensus pipeline. Please try again.",
+          content: "I encountered an error connecting to MS intelligence engine. Please try again.",
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }
       ]);
@@ -79,13 +79,13 @@ export const AriaFloatingWidget: React.FC = () => {
           className="flex items-center gap-2.5 bg-stone-900 text-white px-4 py-3 rounded-full shadow-elevated border border-stone-800 hover:bg-stone-800 transition-all"
         >
           <div className="relative">
-            <div className="w-6 h-6 rounded-full bg-emerald-500 text-stone-950 font-bold text-xs flex items-center justify-center">
-              A
+            <div className="w-7 h-7 rounded-full bg-emerald-500 text-stone-950 font-black text-xs flex items-center justify-center">
+              MS
             </div>
-            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 border border-stone-900" />
+            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 border border-stone-900 animate-pulse" />
           </div>
           <div className="text-left">
-            <div className="text-xs font-semibold leading-tight">Ask Aria</div>
+            <div className="text-xs font-bold leading-tight">Ask MS</div>
             <div className="text-[10px] text-stone-400">Security Consultant</div>
           </div>
         </motion.button>
@@ -104,17 +104,17 @@ export const AriaFloatingWidget: React.FC = () => {
             {/* Header */}
             <div className="px-4 py-3 bg-stone-900 text-white flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-full bg-emerald-500 text-stone-950 font-bold text-xs flex items-center justify-center">
-                  A
+                <div className="w-8 h-8 rounded-full bg-emerald-500 text-stone-950 font-black text-xs flex items-center justify-center">
+                  MS
                 </div>
                 <div>
-                  <div className="text-sm font-semibold flex items-center gap-1.5">
-                    Aria
-                    <span className="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-1.5 py-0.2 rounded font-normal">
-                      Gemini Brain
+                  <div className="text-sm font-bold flex items-center gap-1.5">
+                    MS Consultant
+                    <span className="text-[9px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-1.5 py-0.2 rounded font-bold">
+                      ACTIVE
                     </span>
                   </div>
-                  <div className="text-[10px] text-stone-400">AI Trust & Security Consultant</div>
+                  <div className="text-[10px] text-stone-400">AI Trust & Security Guide</div>
                 </div>
               </div>
               <button
@@ -159,7 +159,7 @@ export const AriaFloatingWidget: React.FC = () => {
                     {msg.structured_advice ? (
                       <div className="space-y-2">
                         <div className="font-semibold text-stone-900 border-b border-stone-100 pb-1">
-                          {msg.structured_advice.direct_answer}
+                          {msg.structured_advice.direct_answer.replace(/Aria/g, 'MS')}
                         </div>
 
                         {msg.structured_advice.key_concerns.length > 0 && (
@@ -199,7 +199,7 @@ export const AriaFloatingWidget: React.FC = () => {
               {loading && (
                 <div className="flex items-center gap-2 text-xs text-stone-500 bg-white p-3 rounded-2xl border border-stone-200 w-fit">
                   <Sparkles className="w-3.5 h-3.5 text-emerald-500 animate-spin" />
-                  <span>Aria is analyzing through Multi-Agent consensus...</span>
+                  <span>MS Consultant is evaluating the threat...</span>
                 </div>
               )}
               <div ref={messagesEndRef} />
@@ -218,7 +218,7 @@ export const AriaFloatingWidget: React.FC = () => {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask Aria about an offer, contract, or link..."
+                  placeholder="Ask MS about an offer, contract, or link..."
                   className="flex-1 bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-400 transition-colors"
                 />
                 <button

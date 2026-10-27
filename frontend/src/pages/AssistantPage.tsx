@@ -17,7 +17,7 @@ export const AssistantPage: React.FC = () => {
     {
       id: 'init',
       role: 'assistant',
-      content: "Hello, I'm Aria, your TrustAI Security Consultant.\n\nI combine intelligence from all 6 specialized Gemini security agents (Scam, Privacy, Contract, Dark Pattern, Credibility, Threat Intelligence) to give you direct, human, and protective guidance.\n\nAsk me about an internship offer, suspicious message, freelance agreement, or website.",
+      content: "Hello, I'm MS, your TrustAI Security Consultant.\n\nI combine intelligence from all specialized detection agents to give you direct, human, and protective guidance.\n\nAsk me about an internship offer, suspicious message, freelance agreement, or website.",
       timestamp: 'Just now'
     }
   ]);
@@ -49,13 +49,13 @@ export const AssistantPage: React.FC = () => {
       const assistantMsg: ChatMessage = {
         id: `asst_${Date.now()}`,
         role: 'assistant',
-        content: res.reply_text,
+        content: res.reply_text.replace(/Aria/g, 'MS'),
         structured_advice: res.structured_advice,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages(prev => [...prev, assistantMsg]);
     } catch (err) {
-      console.warn('Aria consultation fallback used.');
+      console.warn('MS consultation fallback used.');
     } finally {
       setLoading(false);
     }
@@ -73,19 +73,19 @@ export const AssistantPage: React.FC = () => {
       {/* Header */}
       <div className="bg-white rounded-2xl border border-stone-200 p-6 shadow-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-stone-900 text-white flex items-center justify-center font-bold text-lg shadow-subtle relative">
-            <span>A</span>
-            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white" />
+          <div className="w-12 h-12 rounded-2xl bg-stone-900 text-white flex items-center justify-center font-black text-lg shadow-subtle relative">
+            <span>MS</span>
+            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white animate-pulse" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-bold text-stone-900">Aria</h1>
+              <h1 className="text-xl font-bold text-stone-900">MS Consultant</h1>
               <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                AI Security Consultant
+                AI Security Guide
               </span>
             </div>
             <p className="text-xs text-stone-500">
-              Synthesizing 6 Gemini Security Agents in Real-Time
+              Direct, Protective Scam & Legal Guidance
             </p>
           </div>
         </div>
@@ -134,7 +134,7 @@ export const AssistantPage: React.FC = () => {
                 {msg.structured_advice ? (
                   <div className="space-y-3.5">
                     <div className="font-semibold text-stone-900 text-sm pb-2 border-b border-stone-100 flex items-center justify-between">
-                      <span>{msg.structured_advice.direct_answer}</span>
+                      <span>{msg.structured_advice.direct_answer.replace(/Aria/g, 'MS')}</span>
                       <VerdictBadge verdict={msg.structured_advice.risk_level} size="sm" />
                     </div>
 
@@ -165,7 +165,7 @@ export const AssistantPage: React.FC = () => {
 
                     <div className="flex items-center justify-between pt-1 text-[11px] text-stone-400">
                       <span>Confidence: <strong>{msg.structured_advice.confidence_percentage}%</strong></span>
-                      <span className="font-mono">Synthesized by Gemini Decision Agent</span>
+                      <span className="font-mono">Synthesized by MS Decision Agent</span>
                     </div>
                   </div>
                 ) : (
@@ -179,7 +179,7 @@ export const AssistantPage: React.FC = () => {
           {loading && (
             <div className="flex items-center gap-2 text-xs text-stone-500 bg-white p-3 rounded-xl border border-stone-200 w-fit">
               <RefreshCw className="w-3.5 h-3.5 text-emerald-600 animate-spin" />
-              <span>Aria is synthesizing multi-agent findings...</span>
+              <span>MS Consultant is evaluating the threat...</span>
             </div>
           )}
           <div ref={endRef} />
@@ -198,7 +198,7 @@ export const AssistantPage: React.FC = () => {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Aria: 'Should I accept this internship offer?', 'Is this contract safe?'..."
+              placeholder="Ask MS: 'Should I accept this internship offer?', 'Is this contract safe?'..."
               className="flex-1 bg-stone-50 border border-stone-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-stone-900 outline-none focus:border-stone-400 transition-colors"
             />
             <button
