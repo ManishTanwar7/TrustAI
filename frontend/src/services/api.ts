@@ -1,7 +1,9 @@
 import { ChiefVerdict, SecurityMetrics, ChatMessage, AriaRecommendation } from '../types';
 import { SAMPLE_VERDICTS, INITIAL_METRICS } from './mockData';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_BASE = (import.meta as any).env?.VITE_API_URL !== undefined && (import.meta as any).env.VITE_API_URL !== ''
+  ? (import.meta as any).env.VITE_API_URL
+  : (typeof window !== 'undefined' && window.location.hostname === 'localhost' ? 'http://localhost:8000' : '');
 
 async function safeFetch<T>(endpoint: string, options?: RequestInit, fallbackData?: T): Promise<T> {
   try {

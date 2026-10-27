@@ -1,11 +1,11 @@
 services:
-  # TrustAI FastAPI Multi-Agent Backend Service
+  # TrustAI Unified Web Service (React UI + FastAPI Multi-Agent Backend on a single domain)
   - type: web
     name: trustai-backend
     env: python
     region: oregon
     plan: starter
-    buildCommand: "cd backend && pip install -r requirements.txt"
+    buildCommand: "pip install -r backend/requirements.txt"
     startCommand: "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
     envVars:
       - key: PYTHON_VERSION
@@ -18,26 +18,5 @@ services:
         sync: false
       - key: GEMINI_MODEL
         value: gemini-1.5-pro
-      - key: FIREBASE_PROJECT_ID
-        value: trustai-production
       - key: CORS_ORIGINS
         value: "*"
-
-  # TrustAI React Frontend Static Site
-  - type: web
-    name: trustai-frontend
-    env: static
-    region: oregon
-    plan: starter
-    buildCommand: "cd frontend && npm install && npm run build"
-    staticPublishPath: "./frontend/dist"
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    envVars:
-      - key: VITE_API_URL
-        fromService:
-          type: web
-          name: trustai-backend
-          property: host
