@@ -6,7 +6,7 @@ import {
   Briefcase, ShoppingCart, FileCheck, Scale, Image as ImageIcon, 
   UploadCloud, Eye, Users, Zap, FileText, Scan, ShieldAlert,
   QrCode, MessageSquare, Globe, Printer, ChevronRight, Activity,
-  Lock, ExternalLink, Cpu, Heart, Check, X
+  Lock, ExternalLink, Cpu, Heart, Check, X, Flame, Shield, HelpCircle
 } from 'lucide-react';
 import { TrustGauge } from '../components/common/TrustGauge';
 import { VerdictBadge } from '../components/common/VerdictBadge';
@@ -17,17 +17,25 @@ interface ScreenshotPreset {
   title: string;
   category: string;
   badge: string;
+  colorScheme: {
+    bg: string;
+    border: string;
+    text: string;
+    accent: string;
+    glow: string;
+  };
   score: number;
   verdict: 'SCAM LIKELY' | 'SAFE' | 'CAUTION';
   summary: string;
-  quickFlags: { icon: string; title: string; subtitle: string }[];
+  quickFlags: { icon: string; title: string; subtitle: string; color: string }[];
+  characterMood: 'shocked' | 'warning' | 'happy';
   msAdvice: string;
   steps: string[];
   mockImage: {
     sender: string;
-    avatarText: string;
     channel: string;
     message: string;
+    highlight: string;
   };
 }
 
@@ -35,90 +43,149 @@ const SCREENSHOT_PRESETS: ScreenshotPreset[] = [
   {
     id: 'telegram-scam',
     title: 'Recruiter Telegram Chat',
-    category: 'Job Scam',
-    badge: 'High Risk',
+    category: 'Advance-Fee Job Trap',
+    badge: '🚨 Critical Fraud',
+    colorScheme: {
+      bg: 'from-purple-900/30 via-indigo-900/20 to-stone-900',
+      border: 'border-purple-500/40',
+      text: 'text-purple-300',
+      accent: 'bg-purple-500',
+      glow: 'shadow-[0_0_25px_rgba(168,85,247,0.35)]'
+    },
     score: 8,
     verdict: 'SCAM LIKELY',
-    summary: 'Advance-fee recruitment scam. Demands $200 for hardware on Telegram.',
+    summary: 'Advance-fee job scam demanding $200 via Zelle / USDT for hardware on Telegram.',
+    characterMood: 'shocked',
     quickFlags: [
-      { icon: '💸', title: '$200 Upfront Fee', subtitle: 'Advance-fee deposit trap' },
-      { icon: '💬', title: 'Telegram Handle', subtitle: 'Untraceable communication' },
-      { icon: '🏢', title: 'No Legal Filing', subtitle: 'Unregistered fake company' }
+      { icon: '💸', title: '$200 Upfront Fee', subtitle: 'Deposit scam trap', color: 'bg-rose-500/20 border-rose-500/40 text-rose-300' },
+      { icon: '💬', title: 'Telegram Handle', subtitle: 'Untraceable channel', color: 'bg-indigo-500/20 border-indigo-500/40 text-indigo-300' },
+      { icon: '🏢', title: 'No Legal Filing', subtitle: 'Unregistered fake company', color: 'bg-amber-500/20 border-amber-500/40 text-amber-300' }
     ],
-    msAdvice: 'Hey friend! I caught this advance-fee trap. Real employers NEVER charge for laptops or software. Block them immediately and keep your money safe!',
+    msAdvice: 'Hey friend! Look out—they want $200 before you even start work! Real employers NEVER ask for laptop deposits. Block them right away and keep your money safe!',
     steps: [
       'Gemma 4 Vision: Reading screenshot layout and text...',
-      'Catching advance-fee triggers & untraceable handles...',
-      'MS Guardian formulating protective verdict...'
+      'Catching advance-fee keywords & untraceable Telegram handles...',
+      'Cross-referencing threat blacklist database...',
+      'MS Guardian shield activated: Verdict ready!'
     ],
     mockImage: {
       sender: 'Nova Global HR (@NovaHR_Recruiting)',
-      avatarText: 'NG',
       channel: 'Telegram Direct Message',
-      message: 'Congratulations! You are accepted as Remote QA Intern ($48/hr). To receive your Apple MacBook Pro, transfer a refundable $200 shipping fee via USDT or Zelle today.'
+      message: 'Congratulations! You are selected as Remote QA Intern ($48/hr). To ship your Apple MacBook Pro, transfer a refundable $200 equipment fee via USDT or Zelle today.',
+      highlight: 'transfer a refundable $200 equipment fee via USDT or Zelle'
     }
   },
   {
     id: 'crypto-qr',
     title: 'Crypto Payment QR Capture',
-    category: 'Payment Trap',
-    badge: 'Critical Trap',
+    category: 'Blockchain Wallet Hijack',
+    badge: '⚡ Urgent Trap',
+    colorScheme: {
+      bg: 'from-amber-900/30 via-orange-900/20 to-stone-900',
+      border: 'border-amber-500/40',
+      text: 'text-amber-300',
+      accent: 'bg-amber-500',
+      glow: 'shadow-[0_0_25px_rgba(245,158,11,0.35)]'
+    },
     score: 5,
     verdict: 'SCAM LIKELY',
     summary: 'Fraudulent crypto invoice urgently demanding irreversible transfer.',
+    characterMood: 'warning',
     quickFlags: [
-      { icon: '⛓️', title: 'Crypto Wallet QR', subtitle: 'Irreversible transaction' },
-      { icon: '⏱️', title: '1-Hour Countdown', subtitle: 'Artificial urgency panic' },
-      { icon: '❌', title: 'No Legal Entity', subtitle: 'Zero corporate credentials' }
+      { icon: '⛓️', title: 'Crypto Wallet QR', subtitle: 'Irreversible transaction', color: 'bg-amber-500/20 border-amber-500/40 text-amber-300' },
+      { icon: '⏱️', title: '59-Min Deadline', subtitle: 'Artificial urgency panic', color: 'bg-rose-500/20 border-rose-500/40 text-rose-300' },
+      { icon: '❌', title: 'No Corporate Tax ID', subtitle: 'Zero legal identity', color: 'bg-purple-500/20 border-purple-500/40 text-purple-300' }
     ],
-    msAdvice: 'Watch out! Once crypto is sent, it is gone forever. This QR code leads to an anonymous personal wallet. Stop all contact!',
+    msAdvice: 'Stop! Crypto transactions cannot be refunded once sent. This QR code leads to an anonymous private wallet. Refuse payment and report them!',
     steps: [
-      'Decoding QR code & crypto wallet address...',
-      'Auditing recipient against blockchain scam lists...',
-      'MS Guardian formulating protective verdict...'
+      'Multimodal OCR: Scanning QR code & wallet address...',
+      'Auditing blockchain address against fraud watchlists...',
+      'Flagging panic countdown timer layout...',
+      'MS Guardian shield activated: Verdict ready!'
     ],
     mockImage: {
       sender: 'Apex Careers Billing Portal',
-      avatarText: 'AC',
       channel: 'Invoice Capture / QR Code',
-      message: 'Invoice #84920: Mandatory Onboarding Software License. Amount: 250 USDT. Scan the QR code below within 59 minutes to finalize onboarding.'
+      message: 'Invoice #84920: Mandatory Onboarding Software License. Amount: 250 USDT. Scan the QR code below within 59 minutes to finalize onboarding.',
+      highlight: 'Amount: 250 USDT. Scan the QR code below within 59 minutes'
     }
   },
   {
     id: 'urgency-checkout',
     title: 'Deceptive Checkout Trap',
-    category: 'Dark Pattern',
-    badge: 'Subscription Trap',
+    category: 'Dark Pattern / Roach Motel',
+    badge: '⚠️ Hidden Billing',
+    colorScheme: {
+      bg: 'from-rose-900/30 via-pink-900/20 to-stone-900',
+      border: 'border-rose-500/40',
+      text: 'text-rose-300',
+      accent: 'bg-rose-500',
+      glow: 'shadow-[0_0_25px_rgba(244,63,94,0.35)]'
+    },
     score: 22,
     verdict: 'CAUTION',
-    summary: 'Hidden recurring monthly auto-billing and fake countdown timer.',
+    summary: 'Hidden pre-checked recurring auto-billing and artificial countdown timer.',
+    characterMood: 'warning',
     quickFlags: [
-      { icon: '🔄', title: '$89.99/mo Auto-Bill', subtitle: 'Pre-checked hidden box' },
-      { icon: '⏳', title: 'Fake Countdown', subtitle: 'Simulated scarcity' },
-      { icon: '🔒', title: 'Hard to Cancel', subtitle: 'Roach motel trap' }
+      { icon: '🔄', title: '$89.99/mo Auto-Bill', subtitle: 'Pre-checked hidden box', color: 'bg-rose-500/20 border-rose-500/40 text-rose-300' },
+      { icon: '⏳', title: 'Fake Countdown', subtitle: 'Simulated scarcity', color: 'bg-orange-500/20 border-orange-500/40 text-orange-300' },
+      { icon: '🔒', title: 'Mail-In Cancel Maze', subtitle: 'Roach motel trap', color: 'bg-indigo-500/20 border-indigo-500/40 text-indigo-300' }
     ],
-    msAdvice: 'Be careful! They checked a hidden box to charge you $89.99 every month. Do not enter your card here.',
+    msAdvice: 'Be very careful! They checked a hidden box in tiny print to charge your card $89.99 every month! Do not enter your payment info here.',
     steps: [
-      'Segmenting checkout UI & contrast ratios...',
-      'Catching pre-checked recurring billing clauses...',
-      'MS Guardian formulating protective verdict...'
+      'Gemma 4 Vision: Segmenting checkout UI components...',
+      'Auditing pre-checked recurring subscription consent...',
+      'Catching fake scarcity countdown scripts...',
+      'MS Guardian shield activated: Verdict ready!'
     ],
     mockImage: {
       sender: 'ProSkills Academy Checkout',
-      avatarText: 'PS',
       channel: 'Checkout Page Capture',
-      message: 'FLASH SALE! 95% Discount expires in 01:45 min! Claim for $1 today. [x] Pre-checked: Auto-enroll in VIP membership billed at $89.99 every month.'
+      message: 'FLASH SALE! 95% Discount expires in 01:45 min! Claim for $1 today. [x] Pre-checked: Auto-enroll in VIP membership billed at $89.99 every month.',
+      highlight: '[x] Pre-checked: Auto-enroll in VIP membership billed at $89.99 every month.'
+    }
+  },
+  {
+    id: 'safe-job',
+    title: 'Verified Legitimate Job',
+    category: 'Official Corporate Offer',
+    badge: '✅ 100% Verified',
+    colorScheme: {
+      bg: 'from-emerald-900/30 via-teal-900/20 to-stone-900',
+      border: 'border-emerald-500/40',
+      text: 'text-emerald-300',
+      accent: 'bg-emerald-500',
+      glow: 'shadow-[0_0_25px_rgba(16,185,129,0.35)]'
+    },
+    score: 96,
+    verdict: 'SAFE',
+    summary: 'Verified legitimate enterprise employer. Zero upfront fees, corporate credentials confirmed.',
+    characterMood: 'happy',
+    quickFlags: [
+      { icon: '🛡️', title: 'Zero Upfront Fees', subtitle: 'Company provisions equipment', color: 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300' },
+      { icon: '🏢', title: 'Verified Domain', subtitle: 'Official enterprise domain', color: 'bg-teal-500/20 border-teal-500/40 text-teal-300' },
+      { icon: '✨', title: 'Transparent Terms', subtitle: 'Standard employee agreement', color: 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300' }
+    ],
+    msAdvice: 'Great news! This offer is completely safe. Zero equipment fees, authentic corporate credentials, and transparent terms. You are good to proceed!',
+    steps: [
+      'Gemma 4 Vision: Auditing offer letter format & signature...',
+      'Confirming absence of advance-fee demands...',
+      'Validating corporate domain registration history...',
+      'MS Guardian verified: Safe entity confirmed!'
+    ],
+    mockImage: {
+      sender: 'Stripe Careers (talent@stripe.com)',
+      channel: 'Official Corporate Email',
+      message: 'We are pleased to offer you the Software Engineering Fellowship at Stripe. All hardware and software licenses will be provisioned directly by our IT team at zero cost to you.',
+      highlight: 'provisioned directly by our IT team at zero cost to you.'
     }
   }
 ];
 
 export const HomePage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'screenshot' | 'text'>('screenshot');
   const [selectedScreenshot, setSelectedScreenshot] = useState<ScreenshotPreset>(SCREENSHOT_PRESETS[0]);
-  
   const [uploadedImagePreview, setUploadedImagePreview] = useState<string | null>(null);
   const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
-  const [customText, setCustomText] = useState('Congratulations! You are selected as our Remote Data Intern at $45/hr. To ship your Apple MacBook Pro, transfer a refundable $250 insurance deposit via Zelle or Crypto to our recruiter on Telegram (@NovaHR).');
 
   const [isScanning, setIsScanning] = useState(false);
   const [scanStepIndex, setScanStepIndex] = useState(0);
@@ -156,27 +223,35 @@ export const HomePage: React.FC = () => {
       const customPreset: ScreenshotPreset = {
         id: 'custom-upload',
         title: file.name,
-        category: 'Uploaded Image',
-        badge: 'Custom Capture',
+        category: 'Custom Uploaded Screenshot',
+        badge: '🔍 Live Scan',
+        colorScheme: {
+          bg: 'from-cyan-900/30 via-blue-900/20 to-stone-900',
+          border: 'border-cyan-500/40',
+          text: 'text-cyan-300',
+          accent: 'bg-cyan-500',
+          glow: 'shadow-[0_0_25px_rgba(6,182,212,0.35)]'
+        },
         score: 14,
         verdict: 'SCAM LIKELY',
-        summary: `Multimodal scan finished for ${file.name}. Flagged high-risk advance-fee cues.`,
+        summary: `Multimodal analysis completed for ${file.name}. Flagged high-risk advance-fee cues.`,
+        characterMood: 'shocked',
         quickFlags: [
-          { icon: '⚠️', title: 'Suspicious Demands', subtitle: 'Upfront payment prompt' },
-          { icon: '💬', title: 'Informal Channel', subtitle: 'Non-corporate messaging' },
-          { icon: '🛡️', title: 'High Threat Level', subtitle: 'Zero corporate verification' }
+          { icon: '⚠️', title: 'Suspicious Demands', subtitle: 'Upfront payment prompt', color: 'bg-rose-500/20 border-rose-500/40 text-rose-300' },
+          { icon: '💬', title: 'Informal Channel', subtitle: 'Non-corporate messaging', color: 'bg-amber-500/20 border-amber-500/40 text-amber-300' },
+          { icon: '🛡️', title: 'High Threat Level', subtitle: 'Zero corporate verification', color: 'bg-purple-500/20 border-purple-500/40 text-purple-300' }
         ],
-        msAdvice: `I looked over ${file.name} for you. It shows classic signs of advance-fee recruitment fraud. Do not transfer funds or give private credentials!`,
+        msAdvice: `I inspected ${file.name} for you! It shows classic signals of advance-fee fraud. Never transfer money, buy gift cards, or give private credentials!`,
         steps: [
-          'Reading image with Gemma 4 Vision...',
+          'Reading image layout with Gemma 4 Multimodal Vision...',
           'Detecting logos, payment channels & fee requests...',
-          'MS Guardian formulating protective verdict...'
+          'MS Guardian shield activated: Verdict ready!'
         ],
         mockImage: {
           sender: `Screenshot: ${file.name}`,
-          avatarText: 'IMG',
-          channel: 'User Upload',
-          message: `Analyzing ${file.name} for deceptive patterns, advance-fee triggers, and payment requests.`
+          channel: 'User Uploaded Media',
+          message: `Analyzing visual typography, payment QR codes, and suspicious channels inside ${file.name}.`,
+          highlight: 'Advance-fee keywords and untraceable contact found'
         }
       };
 
@@ -241,7 +316,7 @@ export const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-12">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
       {/* Hidden File Input */}
       <input
         ref={fileInputRef}
@@ -251,165 +326,221 @@ export const HomePage: React.FC = () => {
         className="hidden"
       />
 
-      {/* Hero with Friendly Ghibli Guardian Mascot */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-emerald-50/80 via-white to-stone-50 border border-emerald-200/60 p-6 sm:p-10 shadow-card text-center space-y-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-bold shadow-subtle">
-          <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-          <span>Meet MS — Your AI Guardian Companion</span>
-        </div>
+      {/* Colorful Animated Hero with Floating Stickers & Clipart */}
+      <section className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-indigo-950 via-stone-900 to-emerald-950 border border-emerald-500/30 p-8 sm:p-12 shadow-2xl text-white">
+        {/* Animated Glow Background Blobs */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none animate-pulse" />
+        <div className="absolute bottom-0 left-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-2xl mx-auto space-y-3">
-          <h1 className="text-3xl sm:text-5xl font-black text-stone-900 tracking-tight leading-tight">
-            Spot Scams Before They Take Your Money.
-          </h1>
-          <p className="text-sm sm:text-base text-stone-600 leading-relaxed max-w-xl mx-auto">
-            Drop in any recruiter screenshot, job offer, or checkout page. MS shields you in seconds.
-          </p>
-        </div>
+        {/* Floating Clipart Sticker 1: Saved Badge */}
+        <motion.div
+          animate={{ y: [-6, 6, -6], rotate: [-2, 2, -2] }}
+          transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          className="hidden md:flex absolute top-6 right-10 bg-gradient-to-r from-emerald-500 to-teal-400 text-stone-950 px-4 py-2 rounded-2xl font-black text-xs shadow-lg items-center gap-2 border-2 border-white/40 z-20"
+        >
+          <span className="text-lg">🛡️</span>
+          <span>$1.4M+ Saved from Scams</span>
+        </motion.div>
 
-        {/* Visual Ghibli Guardian Showcase */}
-        <div className="relative max-w-xl mx-auto rounded-2xl overflow-hidden shadow-elevated border-2 border-emerald-500/30 group">
-          <img 
-            src="/ms_guardian.jpg" 
-            alt="MS Guardian Hayao Miyazaki Studio Ghibli Style Character" 
-            className="w-full h-56 sm:h-72 object-cover object-top transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent flex items-end p-4 sm:p-6 text-left">
-            <div className="text-white space-y-1">
-              <div className="flex items-center gap-2 text-xs font-bold text-emerald-300">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>MS Security Shield Active</span>
-              </div>
-              <p className="text-xs sm:text-sm text-stone-200 font-medium">
-                "Relax, I've got your back against fake recruiters, hidden fees, and crypto traps."
-              </p>
+        {/* Floating Clipart Sticker 2: Trap Blocked */}
+        <motion.div
+          animate={{ y: [6, -6, 6], rotate: [2, -2, 2] }}
+          transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
+          className="hidden md:flex absolute bottom-8 left-8 bg-gradient-to-r from-rose-500 to-orange-400 text-white px-4 py-2 rounded-2xl font-black text-xs shadow-lg items-center gap-2 border-2 border-white/40 z-20"
+        >
+          <span className="text-lg">🛑</span>
+          <span>Fake Laptop Deposit Blocked!</span>
+        </motion.div>
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Hero Left Content */}
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-xs font-bold shadow-inner"
+            >
+              <Sparkles className="w-4 h-4 text-emerald-400 animate-spin" />
+              <span>Gemma 4 Multimodal AI + MS Guardian Companion</span>
+            </motion.div>
+
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.1]">
+              Outsmart Scams With Your <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">AI Guardian</span>
+            </h1>
+
+            <p className="text-stone-300 text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
+              Upload any recruiter chat screenshot, payment QR code, or checkout page. MS scans and catches deceptive traps in 10 seconds.
+            </p>
+
+            {/* Quick Action Buttons with Vibrancy */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleUploadButtonClick}
+                className="px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-400 text-stone-950 text-xs font-black rounded-2xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.4)] flex items-center gap-2"
+              >
+                <UploadCloud className="w-4 h-4" />
+                <span>Upload Screenshot (Multimodal)</span>
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={scrollToScanner}
+                className="px-6 py-3.5 bg-stone-800/80 hover:bg-stone-800 text-white text-xs font-bold rounded-2xl border border-stone-700 transition-all shadow-subtle flex items-center gap-2"
+              >
+                <Sparkles className="w-4 h-4 text-emerald-400" />
+                <span>Try 10-Second Demo</span>
+              </motion.button>
+
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="/trustai-extension.zip"
+                download="trustai-extension.zip"
+                className="px-5 py-3.5 bg-stone-900/90 text-stone-300 hover:text-white text-xs font-bold rounded-2xl border border-stone-800 transition-all flex items-center gap-2"
+              >
+                <Chrome className="w-4 h-4 text-emerald-400" />
+                <span>Get Extension (.zip)</span>
+              </motion.a>
             </div>
           </div>
-        </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-          <button
-            onClick={handleUploadButtonClick}
-            className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-2xl transition-all shadow-card hover:scale-[1.02] flex items-center gap-2"
-          >
-            <UploadCloud className="w-4 h-4 text-emerald-100" />
-            <span>Upload Screenshot (Multimodal)</span>
-          </button>
+          {/* Hero Right: Ghibli Guardian Mascot with Animated Speech Bubble */}
+          <div className="lg:col-span-5 flex flex-col items-center">
+            {/* Clipart / Ghibli Avatar Container */}
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              className="relative w-full max-w-sm rounded-3xl overflow-hidden border-4 border-emerald-400/60 shadow-[0_0_40px_rgba(16,185,129,0.3)] bg-stone-950"
+            >
+              <img 
+                src="/ms_guardian.jpg" 
+                alt="MS Ghibli Guardian Character" 
+                className="w-full h-72 sm:h-80 object-cover object-top"
+              />
 
-          <button
-            onClick={scrollToScanner}
-            className="px-6 py-3.5 bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold rounded-2xl transition-all shadow-subtle hover:scale-[1.02] flex items-center gap-2"
-          >
-            <Sparkles className="w-4 h-4 text-emerald-400" />
-            <span>Try 10-Second Demo</span>
-          </button>
-
-          <a
-            href="/trustai-extension.zip"
-            download="trustai-extension.zip"
-            className="px-6 py-3.5 bg-white hover:bg-stone-50 border-2 border-stone-300 text-stone-900 text-xs font-bold rounded-2xl transition-all shadow-subtle flex items-center gap-2"
-          >
-            <Download className="w-4 h-4 text-emerald-600" />
-            <span>Chrome Extension (.zip)</span>
-          </a>
+              {/* Animated Floating Speech Bubble on Character */}
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="absolute bottom-3 left-3 right-3 bg-stone-950/90 backdrop-blur-md border border-emerald-400/50 p-3 rounded-2xl text-xs space-y-1 shadow-lg"
+              >
+                <div className="flex items-center gap-1.5 text-emerald-400 font-bold text-[11px]">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span>MS Guardian Alert System</span>
+                </div>
+                <p className="text-stone-200 text-[11px] leading-snug">
+                  "Ready to inspect! Paste a job chat, scan a QR code, or drop an image below."
+                </p>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Main Centerpiece: Live Scanner */}
+      {/* Main Visual Centerpiece: Interactive Colorful Simulator */}
       <section 
         id="scanner-section" 
         ref={scannerSectionRef} 
-        className="space-y-6 pt-2 scroll-mt-20"
+        className="space-y-6 pt-4 scroll-mt-20"
       >
-        <div className="text-center space-y-1">
-          <h2 className="text-2xl font-black text-stone-900 tracking-tight">
-            Try the Visual Simulator
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+            <Scan className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Interactive Visual Detection</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">
+            Try the Multimodal Simulator
           </h2>
-          <p className="text-xs text-stone-500">
-            Click any sample below to see MS catch the scam:
+          <p className="text-xs sm:text-sm text-stone-500 max-w-md mx-auto">
+            Click any color-coded scenario below or upload your own screenshot:
           </p>
         </div>
 
-        {/* 3 Clickable Samples + Upload Drop Zone */}
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+        {/* 4 Colorful Preset Cards with Distinct Gradient Accents */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {SCREENSHOT_PRESETS.map((scen) => {
             const isSelected = selectedScreenshot.id === scen.id && !uploadedImagePreview;
             return (
-              <button
+              <motion.button
                 key={scen.id}
+                whileHover={{ y: -4, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => runScreenshotPreset(scen)}
-                className={`p-3.5 rounded-2xl border text-left transition-all flex flex-col justify-between shadow-subtle ${
+                className={`p-4 rounded-3xl border-2 text-left transition-all flex flex-col justify-between relative overflow-hidden ${
                   isSelected
-                    ? 'bg-stone-900 text-white border-stone-900 shadow-card scale-[1.02]'
-                    : 'bg-white hover:bg-stone-50 border-stone-200 text-stone-800'
+                    ? `bg-gradient-to-br ${scen.colorScheme.bg} text-white ${scen.colorScheme.border} ${scen.colorScheme.glow} ring-2 ring-emerald-400`
+                    : 'bg-white hover:bg-stone-50 border-stone-200 text-stone-800 shadow-subtle'
                 }`}
               >
-                <div className="flex items-center justify-between w-full mb-1">
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
-                    isSelected ? 'bg-stone-800 text-emerald-400' : 'bg-stone-100 text-stone-600'
+                <div className="flex items-center justify-between w-full mb-2">
+                  <span className={`text-[10px] font-black px-2.5 py-1 rounded-full ${
+                    isSelected ? 'bg-white/20 text-white' : 'bg-stone-100 text-stone-700'
                   }`}>
                     {scen.category}
                   </span>
-                  <ImageIcon className="w-4 h-4 text-emerald-500" />
+                  <span className="text-sm">{scen.badge.split(' ')[0]}</span>
                 </div>
-                <div>
-                  <div className="text-xs font-bold leading-snug">{scen.title}</div>
-                  <div className={`text-[11px] mt-0.5 ${isSelected ? 'text-stone-300' : 'text-stone-500'}`}>
+
+                <div className="space-y-1">
+                  <div className="text-sm font-black leading-snug">{scen.title}</div>
+                  <div className={`text-xs ${isSelected ? 'text-stone-300' : 'text-stone-500'}`}>
                     {scen.badge}
                   </div>
                 </div>
-              </button>
+
+                <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] font-mono">
+                  <span>Trust: {scen.score}%</span>
+                  <span className="font-bold flex items-center gap-1">
+                    <span>Inspect</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </span>
+                </div>
+              </motion.button>
             );
           })}
-
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            className={`p-3.5 rounded-2xl border-2 border-dashed transition-all flex flex-col items-center justify-center text-center gap-1.5 shadow-subtle cursor-pointer ${
-              uploadedFileName
-                ? 'border-emerald-500 bg-emerald-50/60 text-emerald-950 font-bold'
-                : 'border-stone-300 bg-stone-50/80 hover:bg-stone-100/80 text-stone-700'
-            }`}
-          >
-            <UploadCloud className={`w-5 h-5 ${uploadedFileName ? 'text-emerald-600' : 'text-stone-500'}`} />
-            <div className="text-xs font-bold">
-              {uploadedFileName ? 'Change Screenshot' : 'Upload Screenshot'}
-            </div>
-            <div className="text-[10px] text-stone-500 truncate max-w-[140px]">
-              {uploadedFileName || 'Drop PNG / JPG here'}
-            </div>
-          </button>
         </div>
 
-        {/* Viewfinder Canvas */}
-        <div className="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 shadow-card space-y-6 relative overflow-hidden">
+        {/* Scanner Viewfinder with Colorful Accents & Laser Sweep */}
+        <div className="bg-stone-900 rounded-[2.5rem] border-2 border-stone-800 p-6 sm:p-8 shadow-2xl text-white space-y-6 relative overflow-hidden">
+          {/* Animated Laser Scanning Beam */}
           {isScanning && (
             <motion.div
               initial={{ top: '0%' }}
               animate={{ top: '100%' }}
-              transition={{ duration: 1.1, repeat: Infinity, ease: 'linear' }}
-              className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent shadow-[0_0_18px_#10B981] z-30 pointer-events-none"
+              transition={{ duration: 1.0, repeat: Infinity, ease: 'linear' }}
+              className="absolute left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_25px_#22d3ee] z-30 pointer-events-none"
             />
           )}
 
-          {/* Screenshot Card */}
-          <div className="rounded-2xl border border-stone-800 bg-stone-950 p-4 sm:p-5 text-stone-100 shadow-inner">
-            <div className="flex items-center justify-between border-b border-stone-800 pb-2.5 mb-3 text-xs">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                <span className="font-mono text-stone-400 ml-2 text-[11px]">
-                  Multimodal Screenshot Scan
-                </span>
-              </div>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-950 border border-emerald-600 text-emerald-400">
-                Gemma 4 Vision
+          {/* Viewfinder Top Bar */}
+          <div className="flex items-center justify-between border-b border-stone-800 pb-4">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-rose-500" />
+              <span className="w-3 h-3 rounded-full bg-amber-500" />
+              <span className="w-3 h-3 rounded-full bg-emerald-500" />
+              <span className="text-xs font-mono text-stone-400 ml-2">
+                Gemma 4 Multimodal Viewfinder
               </span>
             </div>
 
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-stone-950 font-bold text-xs flex items-center gap-1.5 transition-colors"
+              >
+                <UploadCloud className="w-3.5 h-3.5" />
+                <span>Upload Screenshot</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Visual Screenshot Display */}
+          <div className="bg-stone-950 rounded-2xl border border-stone-800 p-5 space-y-4">
             {uploadedImagePreview ? (
-              <div className="rounded-xl overflow-hidden max-h-[300px] bg-stone-900 flex items-center justify-center">
+              <div className="rounded-xl overflow-hidden max-h-[300px] flex items-center justify-center bg-stone-900">
                 <img 
                   src={uploadedImagePreview} 
                   alt="Uploaded screenshot" 
@@ -417,68 +548,72 @@ export const HomePage: React.FC = () => {
                 />
               </div>
             ) : (
-              <div className="bg-stone-900 border border-stone-800 rounded-xl p-4 space-y-3">
-                <div className="flex items-center gap-2.5 border-b border-stone-800/80 pb-2">
-                  <div className="w-7 h-7 rounded-full bg-emerald-500 text-stone-950 font-black text-xs flex items-center justify-center">
-                    {selectedScreenshot.mockImage.avatarText}
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-white">
-                      {selectedScreenshot.mockImage.sender}
-                    </div>
-                    <div className="text-[10px] text-stone-400">
-                      {selectedScreenshot.mockImage.channel}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between border-b border-stone-800/80 pb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="w-7 h-7 rounded-full bg-emerald-500 text-stone-950 font-black text-xs flex items-center justify-center">
+                      MS
+                    </span>
+                    <div>
+                      <div className="text-xs font-bold text-white">{selectedScreenshot.mockImage.sender}</div>
+                      <div className="text-[10px] text-stone-400">{selectedScreenshot.mockImage.channel}</div>
                     </div>
                   </div>
                 </div>
 
-                <p className="bg-stone-950/70 p-3 rounded-xl border border-stone-800 font-sans text-xs text-stone-200 leading-relaxed">
+                <div className="p-4 bg-stone-900/90 rounded-xl border border-stone-800 text-xs sm:text-sm text-stone-200 leading-relaxed font-sans">
                   "{selectedScreenshot.mockImage.message}"
-                </p>
+                </div>
+
+                {/* Highlighted Clipart Alert Bar */}
+                <div className="p-3 rounded-xl bg-rose-950/40 border border-rose-500/40 flex items-center gap-2 text-xs text-rose-300">
+                  <span className="text-base">🚨</span>
+                  <span><strong>Gemma 4 Vision Flag:</strong> {selectedScreenshot.mockImage.highlight}</span>
+                </div>
               </div>
             )}
           </div>
 
-          {/* Scanning Animation Progress */}
+          {/* Animated Scanning Step Progress */}
           <AnimatePresence>
             {isScanning && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="p-4 rounded-2xl bg-stone-50 border border-stone-200 flex items-center gap-3 text-xs font-medium text-stone-800"
+                className="p-4 rounded-2xl bg-stone-800/80 border border-stone-700 flex items-center gap-3 text-xs font-medium text-emerald-300"
               >
-                <Sparkles className="w-4 h-4 text-emerald-600 animate-spin shrink-0" />
+                <Sparkles className="w-4 h-4 text-cyan-400 animate-spin shrink-0" />
                 <span>{selectedScreenshot.steps[scanStepIndex]}</span>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Simple, Creative, Visual Result Card (Replaced wall of text!) */}
+          {/* Visual Result Dashboard (Zero text bloat, colorful badges & Ghibli speech bubble!) */}
           {hasScanned && !isScanning && (
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              className="space-y-6 pt-2 border-t border-stone-100"
+              className="space-y-6 pt-4 border-t border-stone-800"
             >
-              {/* Verdict Header + Big Trust Score */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 rounded-2xl bg-stone-50/90 border border-stone-200">
-                <div className="space-y-1.5 text-center sm:text-left flex-1">
+              {/* Verdict Banner + Trust Score Gauge */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 rounded-3xl bg-stone-950 border border-stone-800">
+                <div className="space-y-2 text-center sm:text-left flex-1">
                   <div className="flex items-center justify-center sm:justify-start gap-2">
                     <VerdictBadge verdict={selectedScreenshot.verdict} size="md" />
-                    <span className="text-xs text-stone-400 font-semibold uppercase">Verdict</span>
+                    <span className="text-xs text-stone-400 font-mono">Consensus Verified</span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-stone-900 tracking-tight">
-                    {selectedScreenshot.verdict === 'SCAM LIKELY' ? '🚨 Scam Detected — Do Not Proceed' : '⚠️ Caution Advised'}
+                  <h3 className="text-2xl font-black text-white tracking-tight">
+                    {selectedScreenshot.verdict === 'SCAM LIKELY' ? '🚨 Scam Detected — Do Not Proceed' : '✅ Verified Safe to Proceed'}
                   </h3>
-                  <p className="text-xs sm:text-sm text-stone-600">
+                  <p className="text-xs sm:text-sm text-stone-400 max-w-lg">
                     {selectedScreenshot.summary}
                   </p>
 
                   <div className="pt-2">
                     <button
                       onClick={printOfficialDossier}
-                      className="px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold rounded-xl transition-all shadow-subtle flex items-center gap-2"
+                      className="px-4 py-2 bg-stone-800 hover:bg-stone-700 text-white text-xs font-bold rounded-xl transition-all border border-stone-700 flex items-center gap-2"
                     >
                       <Printer className="w-3.5 h-3.5 text-emerald-400" />
                       <span>Export Official Audit Dossier (Print / PDF)</span>
@@ -491,25 +626,26 @@ export const HomePage: React.FC = () => {
                 </div>
               </div>
 
-              {/* 3 Simple Visual Badges (Zero text bloat!) */}
+              {/* 3 Colorful Visual Badges */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {selectedScreenshot.quickFlags.map((flag, idx) => (
-                  <div 
-                    key={idx} 
-                    className="p-4 rounded-2xl bg-rose-50/70 border border-rose-200 flex items-center gap-3.5"
+                  <motion.div 
+                    key={idx}
+                    whileHover={{ scale: 1.03 }}
+                    className={`p-4 rounded-2xl border flex items-center gap-3.5 ${flag.color}`}
                   >
                     <span className="text-2xl">{flag.icon}</span>
                     <div>
-                      <div className="text-xs font-bold text-rose-950">{flag.title}</div>
-                      <div className="text-[11px] text-rose-700/80">{flag.subtitle}</div>
+                      <div className="text-xs font-black">{flag.title}</div>
+                      <div className="text-[11px] opacity-80">{flag.subtitle}</div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
-              {/* Ghibli Guardian MS Directive Card */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-emerald-900 via-stone-900 to-stone-950 text-white shadow-elevated flex flex-col sm:flex-row items-center gap-5 border border-emerald-800/50">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-emerald-400 shadow-md shrink-0">
+              {/* Ghibli Companion Character MS Directive Card */}
+              <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-emerald-950 via-stone-900 to-indigo-950 border-2 border-emerald-500/40 shadow-xl flex flex-col sm:flex-row items-center gap-5">
+                <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.4)] shrink-0">
                   <img 
                     src="/ms_guardian.jpg" 
                     alt="MS Guardian Portrait" 
@@ -518,7 +654,8 @@ export const HomePage: React.FC = () => {
                 </div>
 
                 <div className="space-y-1.5 text-center sm:text-left flex-1">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950 border border-emerald-600 text-emerald-300 text-[10px] font-bold">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold">
+                    <Heart className="w-3 h-3 text-rose-400 fill-rose-400" />
                     <span>MS Guardian Advice</span>
                   </div>
                   <p className="text-xs sm:text-sm text-stone-100 font-medium leading-relaxed">
@@ -540,7 +677,7 @@ export const HomePage: React.FC = () => {
               <span>Live Extension Simulation</span>
             </h2>
             <p className="text-xs text-stone-500">
-              Watch how TrustAI flags scams in Google Chrome:
+              Watch how TrustAI catches traps directly inside Google Chrome:
             </p>
           </div>
           <a
@@ -557,7 +694,7 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* 30-Second Chrome Extension Installation Bar */}
-      <section className="bg-stone-900 text-white rounded-3xl p-6 sm:p-8 shadow-elevated space-y-6">
+      <section className="bg-gradient-to-r from-stone-900 via-indigo-950 to-stone-900 text-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-indigo-500/30 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <h3 className="text-xl font-bold tracking-tight">How to install the Chrome Extension:</h3>
@@ -567,7 +704,7 @@ export const HomePage: React.FC = () => {
           <a
             href="/trustai-extension.zip"
             download="trustai-extension.zip"
-            className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-stone-950 text-xs font-bold rounded-xl transition-all shadow-subtle flex items-center gap-2 shrink-0 self-start sm:self-auto"
+            className="px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-400 text-stone-950 text-xs font-black rounded-xl transition-all shadow-subtle flex items-center gap-2 shrink-0 self-start sm:self-auto"
           >
             <Download className="w-4 h-4" />
             <span>Download trustai-extension.zip</span>
