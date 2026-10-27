@@ -13,6 +13,7 @@ import { VerdictBadge } from '../components/common/VerdictBadge';
 import { ExtensionDemoPlayer } from '../components/common/ExtensionDemoPlayer';
 import { HumanConsultantClipart } from '../components/common/HumanConsultantClipart';
 import { SecurityShieldSpinner } from '../components/common/SecurityShieldSpinner';
+import { SecurityTelemetryGraphCard } from '../components/common/SecurityTelemetryGraphCard';
 
 interface ScreenshotPreset {
   id: string;
@@ -280,7 +281,7 @@ export const HomePage: React.FC = () => {
       />
 
       {/* Human-Centered Hero with Natural Slate / Forest Palette */}
-      <section className="bg-white rounded-3xl border border-[#E2E8F0] p-8 sm:p-12 shadow-sm space-y-8">
+      <section className="bg-white/90 backdrop-blur-xl rounded-3xl border border-slate-300/80 p-8 sm:p-12 shadow-md space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           {/* Left Column */}
           <div className="md:col-span-7 space-y-5 text-center md:text-left">
@@ -318,7 +319,7 @@ export const HomePage: React.FC = () => {
               <a
                 href="/trustai-extension.zip"
                 download="trustai-extension.zip"
-                className="px-5 py-3 bg-white hover:bg-[#F8FAFC] border border-[#E2E8F0] text-[#0F172A] text-xs font-bold rounded-xl transition-all shadow-sm flex items-center gap-2"
+                className="px-5 py-3 bg-white hover:bg-slate-50 border border-slate-300 text-[#0F172A] text-xs font-bold rounded-xl transition-all shadow-sm flex items-center gap-2"
               >
                 <Download className="w-4 h-4 text-[#64748B]" />
                 <span>Get Extension (.zip)</span>
@@ -328,7 +329,7 @@ export const HomePage: React.FC = () => {
 
           {/* Right Column: MS Human Clipart */}
           <div className="md:col-span-5 flex flex-col items-center">
-            <div className="p-6 bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0] flex flex-col items-center text-center space-y-3 w-full max-w-sm">
+            <div className="p-6 bg-slate-50/90 rounded-2xl border border-slate-200/90 flex flex-col items-center text-center space-y-3 w-full max-w-sm shadow-xs">
               <HumanConsultantClipart size={170} />
 
               <div className="space-y-1">
@@ -403,9 +404,9 @@ export const HomePage: React.FC = () => {
         </div>
 
         {/* Viewfinder Canvas */}
-        <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-sm space-y-6 relative overflow-hidden">
+        <div className="bg-white/90 backdrop-blur-xl rounded-3xl border border-slate-300/80 p-6 sm:p-8 shadow-md space-y-6 relative overflow-hidden">
           {/* Viewfinder Top Bar */}
-          <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-400" />
               <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
@@ -543,6 +544,11 @@ export const HomePage: React.FC = () => {
             </motion.div>
           )}
         </div>
+      </section>
+
+      {/* Real-Time Security Telemetry & Threat Graph Section */}
+      <section className="space-y-4">
+        <SecurityTelemetryGraphCard />
       </section>
 
       {/* Interactive Video Simulation of Chrome Extension */}

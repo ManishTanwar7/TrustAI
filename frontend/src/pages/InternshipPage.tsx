@@ -127,7 +127,7 @@ export const InternshipPage: React.FC = () => {
       </div>
 
       {/* Verification Form */}
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 sm:p-8 shadow-sm space-y-6">
+      <div className="bg-white/90 backdrop-blur-xl rounded-2xl border border-slate-300/80 p-6 sm:p-8 shadow-md space-y-6">
         <form onSubmit={handleVerify} className="space-y-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
@@ -263,7 +263,7 @@ export const InternshipPage: React.FC = () => {
       {/* Verdict & MS Human Consultation */}
       {verdict && !loading && (
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="bg-white/90 backdrop-blur-xl rounded-2xl border border-slate-300/80 p-6 sm:p-8 shadow-md flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="space-y-3 flex-1">
               <div className="flex items-center gap-2">
                 <VerdictBadge verdict={verdict.verdict} size="md" />

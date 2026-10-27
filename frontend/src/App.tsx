@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { AriaFloatingWidget } from './components/chat/AriaFloatingWidget';
+import { BackgroundSecurityGraph } from './components/layout/BackgroundSecurityGraph';
 
 import { HomePage } from './pages/HomePage';
 import { DashboardPage } from './pages/DashboardPage';
@@ -53,15 +54,20 @@ function AnimatedAppRoutes() {
 export function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#0F172A] selection:bg-[#DCFCE7] selection:text-[#166534]">
-        <Navbar />
+      <div className="min-h-screen flex flex-col relative text-[#0F172A] selection:bg-[#DCFCE7] selection:text-[#166534]">
+        {/* Subtle Security & Financial Telemetry Graph Background */}
+        <BackgroundSecurityGraph />
         
-        <main className="flex-1 flex flex-col">
-          <AnimatedAppRoutes />
-        </main>
+        <div className="relative z-10 flex flex-col min-h-screen">
+          <Navbar />
+          
+          <main className="flex-1 flex flex-col">
+            <AnimatedAppRoutes />
+          </main>
 
-        <Footer />
-        <AriaFloatingWidget />
+          <Footer />
+          <AriaFloatingWidget />
+        </div>
       </div>
     </Router>
   );

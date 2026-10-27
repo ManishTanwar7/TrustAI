@@ -9,7 +9,14 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #F8FAFC;
+  /* Rich, natural multi-tone slate & forest security mesh gradient - distinctly NOT plain white */
+  background: 
+    radial-gradient(circle at 12% 18%, rgba(22, 101, 52, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 88% 22%, rgba(30, 58, 138, 0.14) 0%, transparent 42%),
+    radial-gradient(circle at 50% 65%, rgba(15, 23, 42, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 82% 85%, rgba(13, 148, 136, 0.14) 0%, transparent 40%),
+    linear-gradient(140deg, #CBD5E1 0%, #D7E2DC 25%, #CFDDE8 50%, #D8E0E5 75%, #C2CED8 100%);
+  background-attachment: fixed;
   color: #0F172A;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -22,17 +29,17 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8FAFC;
+  background: #CBD5E1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #64748B;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #475569;
 }
 
-/* Subtle transitions */
+/* Smooth transitions */
 a, button {
   transition: all 0.15s ease-in-out;
 }
